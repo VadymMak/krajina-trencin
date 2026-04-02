@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "title": "Krajina — International Store Trenčín",
+    "description": "International specialties in one place. Italian, Asian, French and Greek products in Trenčín, Slovakia."
+  },
+  "nav": {
+    "home": "Home",
+    "categories": "Categories",
+    "products": "Products",
+    "about": "About",
+    "instagram": "Instagram",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "International specialties in one place",
+    "subtitle": "Italian, Asian, French, Greek and more products from around the world, right here in Trenčín",
+    "cta_primary": "Browse products",
+    "cta_secondary": "Find us"
+  }
+}

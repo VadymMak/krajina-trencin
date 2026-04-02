@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "title": "Krajina — Mezinárodní obchod Trenčín",
+    "description": "Mezinárodní speciality na jednom místě. Italské, asijské, francouzské a řecké produkty v Trenčíně."
+  },
+  "nav": {
+    "home": "Domů",
+    "categories": "Kategorie",
+    "products": "Produkty",
+    "about": "O nás",
+    "instagram": "Instagram",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "title": "Mezinárodní speciality na jednom místě",
+    "subtitle": "Italské, asijské, francouzské, řecké a další produkty z celého světa přímo v Trenčíně",
+    "cta_primary": "Prohlédnout produkty",
+    "cta_secondary": "Najít nás"
+  }
+}
