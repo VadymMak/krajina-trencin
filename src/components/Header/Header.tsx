@@ -9,7 +9,6 @@ import styles from './Header.module.css';
 const LOCALE_OPTIONS = [
   { code: 'sk', label: 'SK' },
   { code: 'cs', label: 'CS' },
-  { code: 'de', label: 'DE' },
   { code: 'en', label: 'EN' },
   { code: 'uk', label: 'UK' },
 ] as const;
