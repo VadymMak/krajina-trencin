@@ -39,6 +39,10 @@
       "india":      "Індія"
     }
   },
+  "instagram": {
+    "subtitle": "Стежте за нами в Instagram",
+    "cta":      "Стежити в Instagram"
+  },
   "testimonials": {
     "label": "Задоволені клієнти",
     "title": "Що кажуть наші клієнти",

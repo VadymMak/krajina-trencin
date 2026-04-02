@@ -90,6 +90,7 @@
   --space-3:  0.75rem;
   --space-4:  1rem;
   --space-6:  1.5rem;
+  --space-16: 4rem;
   --space-20: 5rem;
 
   /* Radius aliases */
@@ -105,9 +106,17 @@
   --text-base: 1rem;
   --text-lg:   1.125rem;
   --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
 
   /* Font size scale */
   --text-4xl: 2.25rem;
+
+  /* Instagram */
+  --instagram-bg:           var(--color-bg);
+  --instagram-cell-bg:      var(--color-border);
+  --instagram-overlay:      rgba(44, 24, 16, 0.55);
+  --instagram-overlay-hover: rgba(44, 24, 16, 0.20);
+  --instagram-handle:       var(--color-accent);
 
   /* Testimonials */
   --testimonials-bg:          #F0EAE0;

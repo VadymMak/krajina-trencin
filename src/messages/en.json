@@ -39,6 +39,10 @@
       "india":      "India"
     }
   },
+  "instagram": {
+    "subtitle": "Follow us on Instagram",
+    "cta":      "Follow on Instagram"
+  },
   "testimonials": {
     "label": "Happy customers",
     "title": "What our customers say",
