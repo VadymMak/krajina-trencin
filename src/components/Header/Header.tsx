@@ -50,9 +50,9 @@ function ChevronIcon() {
 }
 
 export default function Header() {
-  const [menuOpen, setMenuOpen]   = useState(false);
-  const [langOpen, setLangOpen]   = useState(false);
-  const [scrolled, setScrolled]   = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const t             = useTranslations('nav');
   const currentLocale = useLocale();
   const router        = useRouter();
@@ -60,39 +60,40 @@ export default function Header() {
 
   function getHref(key: string): string {
     if (key === 'categories') return `#categories`;
-    if (key === 'products')   return `#products`;
+    if (key === 'products')   return `/${currentLocale}/products`;
     if (key === 'about')      return `#about`;
     if (key === 'contact')    return `#contact`;
     return `/${currentLocale}`;
   }
 
-  // Transparent → solid on scroll
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  // Hide/show on scroll direction
+  // Единый RAF-хандлер: hide/show по направлению + transparent→solid по порогу
   useEffect(() => {
     let lastScrollY = window.scrollY;
     let rafId: number;
 
-    const updateVisibility = () => {
-      const currentScrollY = window.scrollY;
-      const shouldHide = currentScrollY > lastScrollY && currentScrollY > 100;
+    const update = () => {
+      const y = window.scrollY;
+
+      // transparent → solid при scrollY > 80
+      setScrolled(y > 80);
+
+      // hide/show по направлению скролла (adriano паттерн)
+      const shouldHide = y > lastScrollY && y > 100;
       document.documentElement.style.setProperty(
         '--header-visible',
         shouldHide ? '0' : '1'
       );
-      lastScrollY = currentScrollY;
+
+      lastScrollY = y;
     };
 
     const onScroll = () => {
       cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(updateVisibility);
+      rafId = requestAnimationFrame(update);
     };
+
+    // Инициализация при монтировании
+    update();
 
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
@@ -120,7 +121,7 @@ export default function Header() {
       className={`${styles.header} ${scrolled ? styles.headerScrolled : ''}`}
       style={{
         transform: 'translateY(calc((1 - var(--header-visible, 1)) * -100%))',
-        transition: 'transform 0.3s ease, background 0.3s ease, border-color 0.3s ease',
+        transition: 'transform 0.3s ease, background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease',
       }}
     >
       <div className={styles.inner}>

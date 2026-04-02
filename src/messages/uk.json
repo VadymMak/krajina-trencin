@@ -17,5 +17,19 @@
     "subtitle": "Автентичні продукти з усього світу",
     "cta_primary": "Переглянути вибір",
     "cta_secondary": "Відвідати магазин"
+  },
+  "products": {
+    "title": "Наші продукти",
+    "label": "Міжнародний асортимент",
+    "categories": {
+      "all":        "Усі",
+      "taliansko":  "Італія",
+      "azia":       "Азія",
+      "francuzsko": "Франція",
+      "grecko":     "Греція",
+      "spanielsko": "Іспанія",
+      "ukrajina":   "Україна",
+      "india":      "Індія"
+    }
   }
 }

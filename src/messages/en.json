@@ -17,5 +17,19 @@
     "subtitle": "Authentic products from around the world",
     "cta_primary": "Explore our selection",
     "cta_secondary": "Visit the store"
+  },
+  "products": {
+    "title": "Our products",
+    "label": "International assortment",
+    "categories": {
+      "all":        "All",
+      "taliansko":  "Italy",
+      "azia":       "Asia",
+      "francuzsko": "France",
+      "grecko":     "Greece",
+      "spanielsko": "Spain",
+      "ukrajina":   "Ukraine",
+      "india":      "India"
+    }
   }
 }

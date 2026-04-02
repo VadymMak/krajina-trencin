@@ -1,0 +1,134 @@
+/* ─── Main ─────────────────────────────────────────────────────────────────── */
+
+.main {
+  background: var(--color-bg);
+  min-height: 100vh;
+  padding-bottom: var(--spacing-lg);
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* ─── Page header ──────────────────────────────────────────────────────────── */
+
+.pageHeader {
+  text-align: center;
+  padding: 56px 0 48px;
+}
+
+.pageLabel {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 12px;
+}
+
+.pageTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.5px;
+  margin-bottom: 20px;
+}
+
+.pageDivider {
+  width: 40px;
+  height: 2px;
+  background: var(--color-accent);
+  margin: 0 auto;
+  border-radius: 1px;
+}
+
+/* ─── Section ──────────────────────────────────────────────────────────────── */
+
+.section {
+  margin-bottom: 56px;
+}
+
+.sectionHeader {
+  margin-bottom: 24px;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.sectionDivider {
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* ─── Grid ─────────────────────────────────────────────────────────────────── */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+/* ─── Product card ─────────────────────────────────────────────────────────── */
+
+.card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: 0 4px 16px rgba(44, 24, 16, 0.08);
+}
+
+.cardImage {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--color-bg-secondary);
+}
+
+.cardBody {
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cardName {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text);
+  line-height: 1.35;
+}
+
+.cardPrice {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+/* ─── Responsive ───────────────────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 767px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+
+  .pageHeader { padding: 40px 0 32px; }
+}
+
+@media (max-width: 400px) {
+  .grid { grid-template-columns: 1fr; }
+}

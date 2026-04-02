@@ -4,7 +4,7 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 100vh;
+  min-height: 60vh;
   background-color: var(--color-text);
   background-repeat: no-repeat;
   overflow: hidden;
@@ -46,7 +46,7 @@
 
 .title {
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 3.5vw, 3rem);
+  font-size: clamp(3rem, 6vw, 5rem);
   font-weight: 700;
   color: var(--color-white);
   line-height: 1.15;
@@ -308,7 +308,7 @@
   .left  { padding: 80px 32px 64px 40px; }
   .right { padding: 64px 32px 64px 24px; }
 
-  .title { font-size: clamp(1.5rem, 3vw, 2.25rem); }
+  .title { font-size: clamp(2.25rem, 4vw, 3.5rem); }
 }
 
 /* ─── Десктоп ──────────────────────────────────────────────────────────────── */

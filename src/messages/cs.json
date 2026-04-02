@@ -17,5 +17,19 @@
     "subtitle": "Autentické potraviny z celého světa",
     "cta_primary": "Prozkoumejte výběr",
     "cta_secondary": "Navštivte prodejnu"
+  },
+  "products": {
+    "title": "Naše produkty",
+    "label": "Mezinárodní sortiment",
+    "categories": {
+      "all":        "Vše",
+      "taliansko":  "Itálie",
+      "azia":       "Asie",
+      "francuzsko": "Francie",
+      "grecko":     "Řecko",
+      "spanielsko": "Španělsko",
+      "ukrajina":   "Ukrajina",
+      "india":      "Indie"
+    }
   }
 }
