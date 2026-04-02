@@ -38,6 +38,15 @@
   flex-shrink: 0;
 }
 
+.logoImg {
+  filter: brightness(0) invert(1);
+  transition: filter var(--transition);
+}
+
+.headerScrolled .logoImg {
+  filter: none;
+}
+
 /* ─── Desktop nav ──────────────────────────────────────────────────────────── */
 
 .nav {

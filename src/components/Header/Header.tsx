@@ -133,6 +133,7 @@ export default function Header() {
             alt="Krajina"
             height={48}
             width={140}
+            className={styles.logoImg}
             style={{ height: 48, width: 'auto' }}
             priority
           />
