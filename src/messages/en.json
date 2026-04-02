@@ -39,6 +39,16 @@
       "india":      "India"
     }
   },
+  "testimonials": {
+    "label": "Happy customers",
+    "title": "What our customers say",
+    "r1_text": "I absolutely love the Asian selection! Kimchi and miso are amazing, just like home.",
+    "r1_role": "Accountant",
+    "r2_text": "Krajina.eu brings Ukraine to my table! Varenyky taste exactly like grandma's.",
+    "r2_role": "Sales representative",
+    "r3_text": "Krajina perfectly handles European flavours! Italian cheeses and Spanish olives are a hit.",
+    "r3_role": "Real estate agent"
+  },
   "about": {
     "label":        "About us",
     "title":        "Krajina means land",

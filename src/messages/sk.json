@@ -39,6 +39,16 @@
       "india":      "India"
     }
   },
+  "testimonials": {
+    "label": "Spokojní zákazníci",
+    "title": "Čo hovoria naši zákazníci",
+    "r1_text": "Absolútne milujem ázijský výber! Kimchi a miso sú úžasné, presne ako doma. Rýchle doručenie tiež!",
+    "r1_role": "Účtovníčka",
+    "r2_text": "Krajina.eu mi prináša Ukrajinu na stôl! Varenyky chutia presne ako od mojej babičky.",
+    "r2_role": "Obchodný zástupca",
+    "r3_text": "Krajina perfektne zvláda európske chute! Talianske syry a španielske olivy sú hit na každej večeri.",
+    "r3_role": "Realitná maklérka"
+  },
   "about": {
     "label":        "O nás",
     "title":        "Krajina znamená zem",
