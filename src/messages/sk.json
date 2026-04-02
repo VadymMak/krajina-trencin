@@ -39,6 +39,16 @@
       "india":      "India"
     }
   },
+  "trust": {
+    "products_num":   "500+",
+    "products_label": "produktov v ponuke",
+    "countries_num":  "10+",
+    "countries_label":"krajín sveta",
+    "shipping_num":   "60€",
+    "shipping_label": "doprava zadarmo",
+    "store_icon":     "📍",
+    "store_label":    "Kamenná predajňa Trenčín"
+  },
   "footer": {
     "tagline":           "Krajina znamená zem — prinášame vám chute sveta",
     "nav_title":         "Hlavné menu",

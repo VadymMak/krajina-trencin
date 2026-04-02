@@ -39,6 +39,16 @@
       "india":      "India"
     }
   },
+  "trust": {
+    "products_num":   "500+",
+    "products_label": "products available",
+    "countries_num":  "10+",
+    "countries_label":"countries",
+    "shipping_num":   "60€",
+    "shipping_label": "free shipping",
+    "store_icon":     "📍",
+    "store_label":    "Store in Trenčín"
+  },
   "footer": {
     "tagline":           "Krajina means land — we bring you the flavours of the world",
     "nav_title":         "Main menu",

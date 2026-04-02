@@ -39,6 +39,16 @@
       "india":      "Індія"
     }
   },
+  "trust": {
+    "products_num":   "500+",
+    "products_label": "товарів у наявності",
+    "countries_num":  "10+",
+    "countries_label":"країн світу",
+    "shipping_num":   "60€",
+    "shipping_label": "безкоштовна доставка",
+    "store_icon":     "📍",
+    "store_label":    "Магазин у Тренчіні"
+  },
   "footer": {
     "tagline":           "Krajina означає земля — ми приносимо вам смаки світу",
     "nav_title":         "Головне меню",

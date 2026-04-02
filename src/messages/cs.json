@@ -39,6 +39,16 @@
       "india":      "Indie"
     }
   },
+  "trust": {
+    "products_num":   "500+",
+    "products_label": "produktů v nabídce",
+    "countries_num":  "10+",
+    "countries_label":"zemí světa",
+    "shipping_num":   "60€",
+    "shipping_label": "doprava zdarma",
+    "store_icon":     "📍",
+    "store_label":    "Prodejna Trenčín"
+  },
   "footer": {
     "tagline":           "Krajina znamená zem — přinášíme vám chutě světa",
     "nav_title":         "Hlavní menu",
