@@ -40,9 +40,9 @@
   font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--color-accent);
-  background: rgba(var(--color-accent-rgb), 0.15);
-  border: 1px solid rgba(var(--color-accent-rgb), 0.3);
+  color: var(--tag-color);
+  background: var(--tag-bg);
+  border: none;
   border-radius: 20px;
   padding: 4px 14px;
   margin-bottom: 1.5rem;

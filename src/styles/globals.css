@@ -44,6 +44,10 @@
   --overlay-hero-right:  rgba(10, 5, 2, 0.40);
   --overlay-hero-bottom: rgba(10, 5, 2, 0.50);
 
+  /* Tag */
+  --tag-bg:    var(--color-accent);
+  --tag-color: var(--color-white);
+
   /* Nav typography */
   --nav-font-size:       1.125rem;
   --nav-font-weight:     500;
