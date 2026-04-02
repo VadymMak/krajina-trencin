@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
+import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Header.module.css';
 
@@ -49,8 +50,9 @@ function ChevronIcon() {
 }
 
 export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [langOpen, setLangOpen] = useState(false);
+  const [menuOpen, setMenuOpen]   = useState(false);
+  const [langOpen, setLangOpen]   = useState(false);
+  const [scrolled, setScrolled]   = useState(false);
   const t             = useTranslations('nav');
   const currentLocale = useLocale();
   const router        = useRouter();
@@ -64,11 +66,20 @@ export default function Header() {
     return `/${currentLocale}`;
   }
 
+  // Transparent → solid on scroll
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Hide/show on scroll direction
   useEffect(() => {
     let lastScrollY = window.scrollY;
     let rafId: number;
 
-    const updateHeader = () => {
+    const updateVisibility = () => {
       const currentScrollY = window.scrollY;
       const shouldHide = currentScrollY > lastScrollY && currentScrollY > 100;
       document.documentElement.style.setProperty(
@@ -80,7 +91,7 @@ export default function Header() {
 
     const onScroll = () => {
       cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(updateHeader);
+      rafId = requestAnimationFrame(updateVisibility);
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -106,19 +117,24 @@ export default function Header() {
 
   return (
     <header
-      className={styles.header}
+      className={`${styles.header} ${scrolled ? styles.headerScrolled : ''}`}
       style={{
         transform: 'translateY(calc((1 - var(--header-visible, 1)) * -100%))',
-        transition: 'transform var(--transition)',
+        transition: 'transform 0.3s ease, background 0.3s ease, border-color 0.3s ease',
       }}
     >
       <div className={styles.inner}>
 
         {/* Logo */}
         <Link href={`/${currentLocale}`} className={styles.logo}>
-          <span className={styles.logoText}>KRAJINA</span>
-          <span className={styles.logoDot}>.</span>
-          <span className={styles.logoEu}>EU</span>
+          <Image
+            src="/images/logo.png"
+            alt="Krajina"
+            height={48}
+            width={140}
+            style={{ height: 48, width: 'auto' }}
+            priority
+          />
         </Link>
 
         {/* Desktop nav */}
