@@ -1,6 +1,7 @@
 :root {
   /* Colors — backgrounds */
   --color-bg:           #FAFAF5;
+  --color-bg-warm:      #F5EFE6;
   --color-bg-secondary: #F2EDE4;
   --color-bg-card:      #FFFFFF;
   --color-bg-dark:      #2C1810;
@@ -84,14 +85,32 @@
   --header-height:    64px;
 
   /* Spacing aliases */
-  --space-2: 0.5rem;
-  --space-4: 1rem;
+  --space-2:  0.5rem;
+  --space-4:  1rem;
+  --space-20: 5rem;
+
+  /* Radius aliases */
+  --radius-lg: var(--border-radius-lg);
+
+  /* Transition aliases */
+  --transition-base: var(--transition);
 
   /* Font size aliases */
-  --text-sm: 0.875rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
 
   /* Font size scale */
   --text-4xl: 2.25rem;
+
+  /* FeaturedProducts */
+  --products-bg:       var(--color-bg);
+  --card-bg:           var(--color-bg-warm);
+  --card-border:       var(--color-border);
+  --card-hover-shadow: 0 8px 32px rgba(44, 24, 16, 0.12);
+  --card-radius:       var(--radius-lg);
+  --price-color:       var(--color-accent);
+  --placeholder-bg:    var(--color-border);
 
   /* TrustBar */
   --trust-bg:      var(--color-accent);

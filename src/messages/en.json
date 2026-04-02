@@ -39,6 +39,12 @@
       "india":      "India"
     }
   },
+  "featured": {
+    "label":    "Best sellers",
+    "title":    "Fresh specialities",
+    "subtitle": "Authentic products sourced directly from producers",
+    "cta":      "View all products"
+  },
   "trust": {
     "products_num":   "500+",
     "products_label": "products available",

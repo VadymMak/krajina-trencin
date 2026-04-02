@@ -39,6 +39,12 @@
       "india":      "India"
     }
   },
+  "featured": {
+    "label":    "Najpredávanejšie produkty",
+    "title":    "Čerstvé špeciality",
+    "subtitle": "Autentické potraviny vybrané priamo od výrobcov",
+    "cta":      "Zobraziť všetky produkty"
+  },
   "trust": {
     "products_num":   "500+",
     "products_label": "produktov v ponuke",
