@@ -53,6 +53,12 @@
   --nav-font-weight:     500;
   --nav-letter-spacing:  0.01em;
 
+  /* Font sizes — components */
+  --font-size-nav:           1.125rem;
+  --font-size-product-label: 1.125rem;
+  --font-size-product-name:  1.125rem;
+  --font-size-product-price: 1.125rem;
+
   /* Typography */
   --font-display:  var(--font-playfair), Georgia, serif;
   --font-body:     var(--font-source-sans), Arial, sans-serif;

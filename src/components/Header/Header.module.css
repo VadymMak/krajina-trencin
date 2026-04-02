@@ -90,10 +90,10 @@
   border: 1px solid rgba(250, 250, 245, 0.35);
   border-radius: 20px;
   padding: 5px 12px;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  color: rgba(250, 250, 245, 0.8);
+  font-size: var(--font-size-nav);
+  font-weight: var(--nav-font-weight);
+  letter-spacing: var(--nav-letter-spacing);
+  color: rgba(var(--color-bg-rgb), 0.8);
   cursor: pointer;
   transition: color var(--transition), border-color var(--transition);
 }
@@ -125,10 +125,10 @@
   display: block;
   width: 100%;
   padding: 8px 14px;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  color: rgba(250, 250, 245, 0.6);
+  font-size: var(--font-size-nav);
+  font-weight: var(--nav-font-weight);
+  letter-spacing: var(--nav-letter-spacing);
+  color: rgba(var(--color-bg-rgb), 0.6);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -154,9 +154,9 @@
   color: var(--color-white);
   border-radius: var(--border-radius-sm);
   padding: 9px 20px;
-  font-size: 0.6875rem;
+  font-size: var(--font-size-nav);
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: var(--nav-letter-spacing);
   text-transform: uppercase;
   text-decoration: none;
   transition: background var(--transition);

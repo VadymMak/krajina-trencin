@@ -8,10 +8,10 @@ import Link from 'next/link';
 import styles from './Header.module.css';
 
 const LOCALE_OPTIONS = [
-  { code: 'sk', label: 'SK' },
-  { code: 'cs', label: 'CS' },
-  { code: 'en', label: 'EN' },
-  { code: 'uk', label: 'UK' },
+  { code: 'sk', flag: '🇸🇰', label: 'SK' },
+  { code: 'cs', flag: '🇨🇿', label: 'CS' },
+  { code: 'en', flag: '🇬🇧', label: 'EN' },
+  { code: 'uk', flag: '🇺🇦', label: 'UK' },
 ] as const;
 
 const NAV_KEYS = ['home', 'categories', 'products', 'about', 'contact'] as const;
@@ -156,19 +156,19 @@ export default function Header() {
               onClick={() => setLangOpen(!langOpen)}
               aria-label="Zmeniť jazyk"
             >
-              <GlobeIcon />
+              <span>{LOCALE_OPTIONS.find(l => l.code === currentLocale)?.flag}</span>
               <span>{currentLocale.toUpperCase()}</span>
               <ChevronIcon />
             </button>
             {langOpen && (
               <div className={styles.langDropdown}>
-                {LOCALE_OPTIONS.map(({ code, label }) => (
+                {LOCALE_OPTIONS.map(({ code, flag, label }) => (
                   <button
                     key={code}
                     className={`${styles.langOption} ${currentLocale === code ? styles.langOptionActive : ''}`}
                     onClick={() => switchLocale(code)}
                   >
-                    {label}
+                    {flag} {label}
                   </button>
                 ))}
               </div>
@@ -207,13 +207,13 @@ export default function Header() {
           </nav>
 
           <div className={styles.mobileLangs}>
-            {LOCALE_OPTIONS.map(({ code, label }) => (
+            {LOCALE_OPTIONS.map(({ code, flag, label }) => (
               <button
                 key={code}
                 className={`${styles.mobileLangPill} ${currentLocale === code ? styles.mobileLangPillActive : ''}`}
                 onClick={() => switchLocale(code)}
               >
-                {label}
+                {flag} {label}
               </button>
             ))}
           </div>
