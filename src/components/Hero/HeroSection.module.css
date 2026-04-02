@@ -13,7 +13,12 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(44, 24, 16, 0.6);
+  background: linear-gradient(
+    to right,
+    rgba(20, 10, 5, 0.75) 0%,
+    rgba(20, 10, 5, 0.45) 60%,
+    rgba(20, 10, 5, 0.25) 100%
+  );
   pointer-events: none;
   z-index: 0;
 }
@@ -42,24 +47,27 @@
   padding: 4px 14px;
   margin-bottom: 1.5rem;
   width: fit-content;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 .title {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 6vw, 5rem);
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
   font-weight: 700;
   color: var(--color-white);
   line-height: 1.15;
   letter-spacing: -0.5px;
   margin-bottom: 1rem;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
 }
 
 .subtitle {
   font-size: 1rem;
-  color: rgba(250, 250, 245, 0.75);
+  color: rgba(250, 250, 245, 0.9);
   line-height: 1.6;
   letter-spacing: 0.25px;
   margin-bottom: 0;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
 }
 
 .divider {
@@ -151,9 +159,9 @@
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.25px;
-  color: rgba(250, 250, 245, 0.6);
-  background: transparent;
-  border: 1px solid rgba(250, 250, 245, 0.2);
+  color: rgba(250, 250, 245, 0.85);
+  background: rgba(20, 10, 5, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 6px 14px;
   border-radius: 20px;
   cursor: pointer;
@@ -164,13 +172,14 @@
 
 .countryPill:hover {
   color: var(--color-white);
-  border-color: rgba(250, 250, 245, 0.5);
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(20, 10, 5, 0.65);
 }
 
 .countryPillActive {
   color: var(--color-white);
   border-color: var(--color-accent);
-  background: rgba(139, 94, 60, 0.2);
+  background: var(--color-accent);
 }
 
 .flag {
@@ -218,8 +227,8 @@
   grid-template-columns: 52px 1fr auto;
   align-items: center;
   gap: 0.75rem;
-  background: rgba(250, 250, 245, 0.07);
-  border: 1px solid rgba(250, 250, 245, 0.12);
+  background: rgba(20, 10, 5, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--border-radius-md);
   padding: 10px 14px;
   backdrop-filter: blur(8px);
@@ -228,8 +237,8 @@
 }
 
 .card:hover {
-  border-color: rgba(139, 94, 60, 0.5);
-  background: rgba(139, 94, 60, 0.1);
+  border-color: rgba(139, 94, 60, 0.6);
+  background: rgba(20, 10, 5, 0.7);
 }
 
 /* Placeholder изображение */
@@ -252,24 +261,26 @@
   font-size: 0.625rem;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(250, 250, 245, 0.45);
+  color: rgba(250, 250, 245, 0.6);
   white-space: nowrap;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .cardName {
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--color-white);
+  color: #FFFFFF;
   line-height: 1.3;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .cardPrice {
   font-size: 0.9375rem;
   font-weight: 600;
-  color: var(--color-accent);
+  color: #C9A347;
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -308,7 +319,7 @@
   .left  { padding: 80px 32px 64px 40px; }
   .right { padding: 64px 32px 64px 24px; }
 
-  .title { font-size: clamp(2.25rem, 4vw, 3.5rem); }
+  .title { font-size: clamp(1.5rem, 3vw, 2.25rem); }
 }
 
 /* ─── Десктоп ──────────────────────────────────────────────────────────────── */
