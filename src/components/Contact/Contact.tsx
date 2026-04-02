@@ -1,10 +1,13 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import LeafletMap from '@/components/ui/LeafletMap/LeafletMap';
 import styles from './Contact.module.css';
 
-const MAPS_EMBED = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2627.5!2d18.0349301!3d48.8722709!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4714a3448ba80239%3A0xbf22b704132bc7fd!2sKrajina!5e0!3m2!1ssk!2ssk!4v1';
-const MAPS_URL  = 'https://www.google.com/maps/place/Krajina/@48.8722709,18.0349301';
+const MAPS_URL = 'https://www.google.com/maps/place/Krajina/@48.8722709,18.0349301';
+const MAP_LAT  = 48.8722709;
+const MAP_LNG  = 18.0349301;
+const MAP_LABEL = 'Krajina, Soblahovská 3161, Trenčín';
 
 export default function Contact() {
   const t = useTranslations('contact');
@@ -77,15 +80,11 @@ export default function Contact() {
         <div className={styles.right}>
           <span className={styles.deliveryBadge}>{t('delivery')}</span>
           <div className={styles.mapWrap}>
-            <iframe
-              src={MAPS_EMBED}
-              width="100%"
-              height="100%"
-              style={{ border: 'none', borderRadius: 'var(--radius-lg)', minHeight: '400px' }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Krajina na mape"
+            <LeafletMap
+              lat={MAP_LAT}
+              lng={MAP_LNG}
+              label={MAP_LABEL}
+              height={460}
             />
           </div>
         </div>

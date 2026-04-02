@@ -138,13 +138,6 @@
 .mapWrap {
   border-radius: var(--radius-lg);
   overflow: hidden;
-  height: 460px;
-}
-
-.mapWrap iframe {
-  width: 100%;
-  height: 100%;
-  display: block;
 }
 
 /* ── Mobile ── */
@@ -165,6 +158,7 @@
 
   .mapWrap {
     height: 280px;
+    overflow: hidden;
   }
 
   .deliveryBadge {
