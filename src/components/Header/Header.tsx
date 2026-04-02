@@ -59,6 +59,9 @@ export default function Header() {
   const router        = useRouter();
   const pathname      = usePathname();
 
+  // Страницы без hero-секции — хедер всегда solid (тёмный фон)
+  const hasHero = pathname === `/${currentLocale}` || pathname === '/';
+
   function getHref(key: string): string {
     if (key === 'categories') return `#categories`;
     if (key === 'products')   return `/${currentLocale}/products`;
@@ -119,7 +122,7 @@ export default function Header() {
 
   return (
     <header
-      className={`${styles.header} ${scrolled ? styles.headerScrolled : ''}`}
+      className={`${styles.header} ${(scrolled || !hasHero) ? styles.headerScrolled : ''}`}
       style={{
         transform: 'translateY(calc((1 - var(--header-visible, 1)) * -100%))',
         transition: 'transform 0.3s ease, background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease',

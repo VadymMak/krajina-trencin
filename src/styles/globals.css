@@ -32,6 +32,7 @@
 
   /* Colors — utility */
   --color-overlay:      rgba(44, 24, 16, 0.5);
+  --header-bg-solid:    rgba(44, 24, 16, 0.97);
 
   /* Text shadows */
   --shadow-text-sm: 0 1px 4px rgba(0, 0, 0, 0.4);
