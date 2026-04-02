@@ -15,9 +15,9 @@
   inset: 0;
   background: linear-gradient(
     to right,
-    rgba(var(--color-hero-dark-rgb), 0.75) 0%,
-    rgba(var(--color-hero-dark-rgb), 0.45) 60%,
-    rgba(var(--color-hero-dark-rgb), 0.25) 100%
+    var(--overlay-hero-left)   0%,
+    var(--overlay-hero-center) 60%,
+    var(--overlay-hero-right)  100%
   );
   pointer-events: none;
   z-index: 0;
@@ -58,7 +58,7 @@
   line-height: 1.15;
   letter-spacing: -0.5px;
   margin-bottom: 1rem;
-  text-shadow: var(--shadow-text-lg);
+  text-shadow: var(--text-shadow-h1);
 }
 
 .subtitle {
@@ -67,7 +67,7 @@
   line-height: 1.6;
   letter-spacing: 0.25px;
   margin-bottom: 0;
-  text-shadow: var(--shadow-text-md);
+  text-shadow: var(--text-shadow-body);
 }
 
 .divider {
