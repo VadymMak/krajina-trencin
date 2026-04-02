@@ -14,7 +14,7 @@ const LOCALE_OPTIONS = [
   { code: 'uk', flag: '🇺🇦', label: 'UK' },
 ] as const;
 
-const NAV_KEYS = ['home', 'categories', 'products', 'about', 'contact'] as const;
+const NAV_KEYS = ['home', 'products', 'about', 'blog', 'contact'] as const;
 
 function BurgerIcon() {
   return (
@@ -63,10 +63,10 @@ export default function Header() {
   const hasHero = pathname === `/${currentLocale}` || pathname === '/';
 
   function getHref(key: string): string {
-    if (key === 'categories') return `#categories`;
-    if (key === 'products')   return `/${currentLocale}/products`;
-    if (key === 'about')      return `#about`;
-    if (key === 'contact')    return `#contact`;
+    if (key === 'products') return `/${currentLocale}/products`;
+    if (key === 'about')    return `#about`;
+    if (key === 'blog')     return `#blog`;
+    if (key === 'contact')  return `#contact`;
     return `/${currentLocale}`;
   }
 
