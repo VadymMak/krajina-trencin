@@ -4,18 +4,25 @@
     "description": "International specialties in one place. Italian, Asian, French and Greek products in Trenčín, Slovakia."
   },
   "nav": {
-    "home": "Home",
+    "home":       "Home",
     "categories": "Categories",
-    "products": "Products",
-    "about": "About",
-    "instagram": "Instagram",
-    "contact": "Contact"
+    "products":   "Products",
+    "about":      "About",
+    "instagram":  "Instagram",
+    "contact":    "Contact",
+    "shop":       "Store",
+    "blog":       "Blog"
+  },
+  "header": {
+    "lang_switch": "Change language",
+    "open_menu":   "Open menu",
+    "close_menu":  "Close menu"
   },
   "hero": {
-    "tag": "Soblahovská 3161, Trenčín",
-    "title": "International specialties in one place",
-    "subtitle": "Authentic products from around the world",
-    "cta_primary": "Explore our selection",
+    "tag":           "Soblahovská 3161, Trenčín",
+    "title":         "International specialties in one place",
+    "subtitle":      "Authentic products from around the world",
+    "cta_primary":   "Explore our selection",
     "cta_secondary": "Visit the store"
   },
   "products": {
@@ -31,5 +38,16 @@
       "ukrajina":   "Ukraine",
       "india":      "India"
     }
+  },
+  "footer": {
+    "tagline":           "Krajina means land — we bring you the flavours of the world",
+    "nav_title":         "Main menu",
+    "categories_title":  "Categories",
+    "contact_title":     "Contact",
+    "delivery_badge":    "Free delivery over 60 €",
+    "copyright":         "© {year} Krajina. All rights reserved.",
+    "privacy":           "Privacy policy",
+    "terms":             "Terms & conditions",
+    "cookies":           "Cookies"
   }
 }

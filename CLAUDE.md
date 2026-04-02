@@ -2,6 +2,33 @@
 
 # Krajina — Project Rules
 
+## I18N — MANDATORY
+
+**EVERY text visible to the user MUST go through next-intl.**
+**NEVER hardcode user-visible strings in components.**
+
+This includes:
+- Button labels, nav links, headings, taglines
+- Placeholder text, aria-labels, alt text
+- Badge/tag text, copyright, legal links
+- Error messages, empty states
+
+**Workflow for every new component:**
+1. Add ALL new text keys to `src/messages/sk.json` (primary)
+2. Translate and add to `src/messages/cs.json`
+3. Translate and add to `src/messages/en.json`
+4. Translate and add to `src/messages/uk.json`
+5. Use `useTranslations('section')` in the component
+6. NEVER commit a component without translations in all 4 languages
+
+**Exceptions (do NOT translate):**
+- Phone numbers, email addresses, physical addresses
+- URLs and hrefs
+- Brand names: "Krajina", "Instagram", "Facebook"
+- Technical strings not shown to users (CSS classes, IDs)
+
+
+
 ## CSS VARIABLES — MANDATORY
 
 **NEVER use hardcoded values for:**

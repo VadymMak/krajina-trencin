@@ -4,18 +4,25 @@
     "description": "Міжнародні спеціалітети в одному місці. Італійські, азіатські, французькі та грецькі продукти в Тренчіні."
   },
   "nav": {
-    "home": "Головна",
+    "home":       "Головна",
     "categories": "Категорії",
-    "products": "Продукти",
-    "about": "Про нас",
-    "instagram": "Instagram",
-    "contact": "Контакти"
+    "products":   "Продукти",
+    "about":      "Про нас",
+    "instagram":  "Instagram",
+    "contact":    "Контакти",
+    "shop":       "Магазин",
+    "blog":       "Блог"
+  },
+  "header": {
+    "lang_switch": "Змінити мову",
+    "open_menu":   "Відкрити меню",
+    "close_menu":  "Закрити меню"
   },
   "hero": {
-    "tag": "Soblahovská 3161, Trenčín",
-    "title": "Міжнародні спеціалітети в одному місці",
-    "subtitle": "Автентичні продукти з усього світу",
-    "cta_primary": "Переглянути вибір",
+    "tag":           "Soblahovská 3161, Trenčín",
+    "title":         "Міжнародні спеціалітети в одному місці",
+    "subtitle":      "Автентичні продукти з усього світу",
+    "cta_primary":   "Переглянути вибір",
     "cta_secondary": "Відвідати магазин"
   },
   "products": {
@@ -31,5 +38,16 @@
       "ukrajina":   "Україна",
       "india":      "Індія"
     }
+  },
+  "footer": {
+    "tagline":           "Krajina означає земля — ми приносимо вам смаки світу",
+    "nav_title":         "Головне меню",
+    "categories_title":  "Категорії",
+    "contact_title":     "Контакти",
+    "delivery_badge":    "Безкоштовна доставка від 60 €",
+    "copyright":         "© {year} Krajina. Усі права захищені.",
+    "privacy":           "Політика конфіденційності",
+    "terms":             "Умови використання",
+    "cookies":           "Cookies"
   }
 }

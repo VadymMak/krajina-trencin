@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 import styles from './Footer.module.css';
 
 function FacebookIcon() {
@@ -58,31 +59,34 @@ function LocationIcon() {
 }
 
 const NAV_LINKS = [
-  { label: 'Domov',     href: '/' },
-  { label: 'Predajňa',  href: '#categories' },
-  { label: 'Obchod',    href: '/products' },
-  { label: 'O nás',     href: '#about' },
-  { label: 'Blog',      href: '#blog' },
-  { label: 'Kontakt',   href: '#contact' },
-];
+  { key: 'home',     href: '/' },
+  { key: 'shop',     href: '#categories' },
+  { key: 'products', href: '/products' },
+  { key: 'about',    href: '#about' },
+  { key: 'blog',     href: '#blog' },
+  { key: 'contact',  href: '#contact' },
+] as const;
 
-const CATEGORIES = [
-  { flag: '🇮🇹', label: 'Taliansko' },
-  { flag: '🌏',  label: 'Ázia' },
-  { flag: '🇫🇷', label: 'Francúzsko' },
-  { flag: '🇬🇷', label: 'Grécko' },
-  { flag: '🇪🇸', label: 'Španielsko' },
-  { flag: '🇺🇦', label: 'Ukrajina' },
-];
+const CATEGORY_KEYS = [
+  { flag: '🇮🇹', key: 'taliansko' },
+  { flag: '🌏',  key: 'azia' },
+  { flag: '🇫🇷', key: 'francuzsko' },
+  { flag: '🇬🇷', key: 'grecko' },
+  { flag: '🇪🇸', key: 'spanielsko' },
+  { flag: '🇺🇦', key: 'ukrajina' },
+] as const;
 
-const LEGAL_LINKS = [
-  { label: 'Ochrana súkromia', href: '#' },
-  { label: 'Obchodné podmienky', href: '#' },
-  { label: 'Cookies', href: '#' },
-];
+const LEGAL_KEYS = [
+  { key: 'privacy', href: '#' },
+  { key: 'terms',   href: '#' },
+  { key: 'cookies', href: '#' },
+] as const;
 
-export default function Footer() {
-  const year = new Date().getFullYear();
+export default async function Footer() {
+  const t        = await getTranslations('footer');
+  const tNav     = await getTranslations('nav');
+  const tCat     = await getTranslations('products.categories');
+  const year     = new Date().getFullYear();
 
   return (
     <footer className={styles.footer}>
@@ -102,7 +106,7 @@ export default function Footer() {
               />
             </a>
             <p className={styles.brandDesc}>
-              Krajina znamená zem — prinášame vám chute sveta
+              {t('tagline')}
             </p>
             <div className={styles.socials}>
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
@@ -126,11 +130,11 @@ export default function Footer() {
 
           {/* Колонка 2 — Навигация */}
           <div className={styles.col}>
-            <h4 className={styles.colTitle}>Hlavné menu</h4>
+            <h4 className={styles.colTitle}>{t('nav_title')}</h4>
             <nav className={styles.navList}>
-              {NAV_LINKS.map(({ label, href }) => (
-                <a key={label} href={href} className={styles.navLink}>
-                  {label}
+              {NAV_LINKS.map(({ key, href }) => (
+                <a key={key} href={href} className={styles.navLink}>
+                  {tNav(key)}
                 </a>
               ))}
             </nav>
@@ -138,12 +142,12 @@ export default function Footer() {
 
           {/* Колонка 3 — Категории */}
           <div className={styles.col}>
-            <h4 className={styles.colTitle}>Kategórie</h4>
+            <h4 className={styles.colTitle}>{t('categories_title')}</h4>
             <nav className={styles.navList}>
-              {CATEGORIES.map(({ flag, label }) => (
-                <a key={label} href="/products" className={styles.navLink}>
+              {CATEGORY_KEYS.map(({ flag, key }) => (
+                <a key={key} href="/products" className={styles.navLink}>
                   <span className={styles.catFlag}>{flag}</span>
-                  {label}
+                  {tCat(key)}
                 </a>
               ))}
             </nav>
@@ -151,7 +155,7 @@ export default function Footer() {
 
           {/* Колонка 4 — Контакт */}
           <div className={styles.col}>
-            <h4 className={styles.colTitle}>Kontakt</h4>
+            <h4 className={styles.colTitle}>{t('contact_title')}</h4>
             <ul className={styles.contactList}>
               <li className={styles.contactItem}>
                 <span className={styles.contactIcon}><LocationIcon /></span>
@@ -167,7 +171,7 @@ export default function Footer() {
               </li>
             </ul>
             <span className={styles.deliveryBadge}>
-              Doprava zadarmo nad 60 €
+              {t('delivery_badge')}
             </span>
           </div>
 
@@ -179,13 +183,13 @@ export default function Footer() {
         <div className={styles.bottomInner}>
           <div className={styles.bottomBar}>
             <span className={styles.copyright}>
-              © {year} Krajina. Všetky práva vyhradené.
+              {t('copyright', { year })}
             </span>
             <nav className={styles.legalLinks}>
-              {LEGAL_LINKS.map(({ label, href }, i) => (
-                <span key={label} className={styles.legalGroup}>
+              {LEGAL_KEYS.map(({ key, href }, i) => (
+                <span key={key} className={styles.legalGroup}>
                   {i > 0 && <span className={styles.legalSep}>·</span>}
-                  <a href={href} className={styles.legalLink}>{label}</a>
+                  <a href={href} className={styles.legalLink}>{t(key)}</a>
                 </span>
               ))}
             </nav>

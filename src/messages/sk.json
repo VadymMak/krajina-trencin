@@ -4,18 +4,25 @@
     "description": "Medzinárodné špeciality na jednom mieste. Talianske, ázijské, francúzske a grécke produkty v Trenčíne."
   },
   "nav": {
-    "home": "Domov",
+    "home":       "Domov",
     "categories": "Kategórie",
-    "products": "Produkty",
-    "about": "O nás",
-    "instagram": "Instagram",
-    "contact": "Kontakt"
+    "products":   "Produkty",
+    "about":      "O nás",
+    "instagram":  "Instagram",
+    "contact":    "Kontakt",
+    "shop":       "Predajňa",
+    "blog":       "Blog"
+  },
+  "header": {
+    "lang_switch": "Zmeniť jazyk",
+    "open_menu":   "Otvoriť menu",
+    "close_menu":  "Zavrieť menu"
   },
   "hero": {
-    "tag": "Soblahovská 3161, Trenčín",
-    "title": "Medzinárodné špeciality na jednom mieste",
-    "subtitle": "Autentické potraviny z celého sveta",
-    "cta_primary": "Preskúmajte výber",
+    "tag":           "Soblahovská 3161, Trenčín",
+    "title":         "Medzinárodné špeciality na jednom mieste",
+    "subtitle":      "Autentické potraviny z celého sveta",
+    "cta_primary":   "Preskúmajte výber",
     "cta_secondary": "Navštívte predajňu"
   },
   "products": {
@@ -31,5 +38,16 @@
       "ukrajina":   "Ukrajina",
       "india":      "India"
     }
+  },
+  "footer": {
+    "tagline":           "Krajina znamená zem — prinášame vám chute sveta",
+    "nav_title":         "Hlavné menu",
+    "categories_title":  "Kategórie",
+    "contact_title":     "Kontakt",
+    "delivery_badge":    "Doprava zadarmo nad 60 €",
+    "copyright":         "© {year} Krajina. Všetky práva vyhradené.",
+    "privacy":           "Ochrana súkromia",
+    "terms":             "Obchodné podmienky",
+    "cookies":           "Cookies"
   }
 }

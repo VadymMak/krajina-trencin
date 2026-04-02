@@ -54,6 +54,7 @@ export default function Header() {
   const [langOpen, setLangOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const t             = useTranslations('nav');
+  const tHeader       = useTranslations('header');
   const currentLocale = useLocale();
   const router        = useRouter();
   const pathname      = usePathname();
@@ -154,7 +155,7 @@ export default function Header() {
             <button
               className={styles.langBtn}
               onClick={() => setLangOpen(!langOpen)}
-              aria-label="Zmeniť jazyk"
+              aria-label={tHeader('lang_switch')}
             >
               <span>{LOCALE_OPTIONS.find(l => l.code === currentLocale)?.flag}</span>
               <span>{currentLocale.toUpperCase()}</span>
@@ -184,7 +185,7 @@ export default function Header() {
         <button
           className={styles.burger}
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? 'Zavrieť menu' : 'Otvoriť menu'}
+          aria-label={menuOpen ? tHeader('close_menu') : tHeader('open_menu')}
         >
           {menuOpen ? <CloseIcon /> : <BurgerIcon />}
         </button>
