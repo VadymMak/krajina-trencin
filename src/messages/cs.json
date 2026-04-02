@@ -12,9 +12,10 @@
     "contact": "Kontakt"
   },
   "hero": {
+    "tag": "Soblahovská 3161, Trenčín",
     "title": "Mezinárodní speciality na jednom místě",
-    "subtitle": "Italské, asijské, francouzské, řecké a další produkty z celého světa přímo v Trenčíně",
-    "cta_primary": "Prohlédnout produkty",
-    "cta_secondary": "Najít nás"
+    "subtitle": "Autentické potraviny z celého světa",
+    "cta_primary": "Prozkoumejte výběr",
+    "cta_secondary": "Navštivte prodejnu"
   }
 }

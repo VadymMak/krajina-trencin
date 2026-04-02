@@ -12,9 +12,10 @@
     "contact": "Contact"
   },
   "hero": {
+    "tag": "Soblahovská 3161, Trenčín",
     "title": "International specialties in one place",
-    "subtitle": "Italian, Asian, French, Greek and more products from around the world, right here in Trenčín",
-    "cta_primary": "Browse products",
-    "cta_secondary": "Find us"
+    "subtitle": "Authentic products from around the world",
+    "cta_primary": "Explore our selection",
+    "cta_secondary": "Visit the store"
   }
 }
