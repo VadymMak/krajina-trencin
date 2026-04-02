@@ -86,22 +86,34 @@
 
   /* Spacing aliases */
   --space-2:  0.5rem;
+  --space-3:  0.75rem;
   --space-4:  1rem;
   --space-20: 5rem;
 
   /* Radius aliases */
+  --radius-md: var(--border-radius-md);
   --radius-lg: var(--border-radius-lg);
 
   /* Transition aliases */
   --transition-base: var(--transition);
 
   /* Font size aliases */
+  --text-xs:   0.75rem;
   --text-sm:   0.875rem;
   --text-base: 1rem;
   --text-lg:   1.125rem;
+  --text-2xl:  1.5rem;
 
   /* Font size scale */
   --text-4xl: 2.25rem;
+
+  /* About */
+  --about-bg:          var(--color-bg-dark);
+  --about-heading:     var(--color-white);
+  --about-text:        rgba(255, 255, 255, 0.70);
+  --about-accent:      var(--color-accent-light);
+  --about-card-bg:     rgba(255, 255, 255, 0.06);
+  --about-card-border: rgba(255, 255, 255, 0.10);
 
   /* FeaturedProducts */
   --products-bg:       var(--color-bg);

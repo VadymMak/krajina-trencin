@@ -39,6 +39,18 @@
       "india":      "India"
     }
   },
+  "about": {
+    "label":        "About us",
+    "title":        "Krajina means land",
+    "subtitle":     "we bring you the flavours of the world",
+    "body":         "We are a store that wants to bring pleasure and joy in the form of quality food products from around the world. Our selection will satisfy even the most demanding customers.",
+    "card1_title":  "Quality products",
+    "card1_text":   "Premium selection from around the world",
+    "card2_title":  "Fast delivery",
+    "card2_text":   "Order by 12:00 = next day",
+    "card3_title":  "Physical store",
+    "card3_text":   "Visit us in Trenčín"
+  },
   "featured": {
     "label":    "Best sellers",
     "title":    "Fresh specialities",

@@ -39,6 +39,18 @@
       "india":      "India"
     }
   },
+  "about": {
+    "label":        "O nás",
+    "title":        "Krajina znamená zem",
+    "subtitle":     "prinášame vám chute sveta",
+    "body":         "Sme obchod, ktorý chce prinášať pôžitok a radosť v podobe kvalitných potravín z celého sveta. Ponuka našich potravín uspokojí aj tých najnáročnejších zákazníkov.",
+    "card1_title":  "Kvalitné potraviny",
+    "card1_text":   "Prémiový výber z celého sveta",
+    "card2_title":  "Rýchle doručenie",
+    "card2_text":   "Do 12:00 = nasledujúci deň",
+    "card3_title":  "Kamenná predajňa",
+    "card3_text":   "Navštívte nás v Trenčíne"
+  },
   "featured": {
     "label":    "Najpredávanejšie produkty",
     "title":    "Čerstvé špeciality",

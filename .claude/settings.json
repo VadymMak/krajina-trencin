@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /Users/vadymmak/Documents/projects/krajina-trencin/public/images/about/shop-01.jpg \"https://www.krajina.eu/wp-content/uploads/2024/07/Krajina-01.jpg\")",
+      "Bash(curl -s -o /Users/vadymmak/Documents/projects/krajina-trencin/public/images/about/shop-02.jpg \"https://www.krajina.eu/wp-content/uploads/2024/07/Krajina-08.jpg\")",
+      "Bash(curl -s -o /Users/vadymmak/Documents/projects/krajina-trencin/public/images/about/shop-03.jpg \"https://www.krajina.eu/wp-content/uploads/2024/07/Krajina-12.jpg\")",
+      "Bash(curl -s -o /Users/vadymmak/Documents/projects/krajina-trencin/public/images/about/shop-04.jpg \"https://www.krajina.eu/wp-content/uploads/2024/07/Krajina-13.jpg\")"
+    ]
+  }
+}
