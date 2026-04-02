@@ -4,6 +4,7 @@ import FeaturedProducts from '@/components/FeaturedProducts/FeaturedProducts';
 import About from '@/components/About/About';
 import Testimonials from '@/components/Testimonials/Testimonials';
 import Instagram from '@/components/Instagram/Instagram';
+import Contact from '@/components/Contact/Contact';
 
 export default function HomePage() {
   return (
@@ -14,7 +15,7 @@ export default function HomePage() {
       <About />
       <Testimonials />
       <Instagram />
-      {/* TODO: Contact */}
+      <Contact />
     </main>
   );
 }

@@ -86,10 +86,13 @@
   --header-height:    64px;
 
   /* Spacing aliases */
+  --space-1:  0.25rem;
   --space-2:  0.5rem;
   --space-3:  0.75rem;
   --space-4:  1rem;
+  --space-5:  1.25rem;
   --space-6:  1.5rem;
+  --space-8:  2rem;
   --space-16: 4rem;
   --space-20: 5rem;
 
@@ -110,6 +113,15 @@
 
   /* Font size scale */
   --text-4xl: 2.25rem;
+
+  /* Contact */
+  --contact-bg:          #3D2518;
+  --contact-heading:     var(--color-white);
+  --contact-text:        rgba(255, 255, 255, 0.70);
+  --contact-accent:      var(--color-accent-light);
+  --contact-card-bg:     rgba(255, 255, 255, 0.06);
+  --contact-card-border: rgba(255, 255, 255, 0.10);
+  --contact-icon-color:  var(--color-accent-light);
 
   /* Instagram */
   --instagram-bg:           var(--color-bg);

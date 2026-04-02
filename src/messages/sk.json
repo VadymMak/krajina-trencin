@@ -39,6 +39,17 @@
       "india":      "India"
     }
   },
+  "contact": {
+    "label":        "Navštívte nás",
+    "title":        "Máme otvorené!",
+    "subtitle":     "Nájdete nás v centre Trenčína",
+    "card_address": "Adresa",
+    "card_contact": "Kontakt",
+    "card_hours":   "Otváracie hodiny",
+    "hours_body":   "Pondelok – Piatok: 9:00 – 18:00\nSobota: 9:00 – 13:00\nNedeľa: zatvorené",
+    "cta_maps":     "Zobraziť na Google Maps",
+    "delivery":     "Doprava zadarmo nad 60 €"
+  },
   "instagram": {
     "subtitle": "Sledujte nás na Instagrame",
     "cta":      "Sledovať na Instagrame"

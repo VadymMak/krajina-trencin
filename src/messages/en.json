@@ -39,6 +39,17 @@
       "india":      "India"
     }
   },
+  "contact": {
+    "label":        "Visit us",
+    "title":        "We are open!",
+    "subtitle":     "Find us in the centre of Trenčín",
+    "card_address": "Address",
+    "card_contact": "Contact",
+    "card_hours":   "Opening hours",
+    "hours_body":   "Monday – Friday: 9:00 – 18:00\nSaturday: 9:00 – 13:00\nSunday: closed",
+    "cta_maps":     "View on Google Maps",
+    "delivery":     "Free delivery over 60 €"
+  },
   "instagram": {
     "subtitle": "Follow us on Instagram",
     "cta":      "Follow on Instagram"
