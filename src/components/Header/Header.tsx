@@ -54,7 +54,7 @@ export default function Header() {
   const currentLocale = useLocale();
   const router        = useRouter();
   const pathname      = usePathname();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const hasHero = pathname === `/${currentLocale}` || pathname === '/';
 
@@ -108,9 +108,9 @@ export default function Header() {
     router.push(segments.join('/') || '/');
   }, [pathname, router]);
 
-  const initials = session?.user?.name
-    ? session.user.name.slice(0, 1).toUpperCase()
-    : session?.user?.email?.slice(0, 1).toUpperCase() ?? '?';
+  const initials = (
+    session?.user?.name?.[0] ?? session?.user?.email?.[0] ?? ''
+  ).toUpperCase();
 
   const isAdmin = session?.user?.role === 'admin';
 
@@ -179,7 +179,7 @@ export default function Header() {
           <BasketButton />
 
           {/* Auth */}
-          {!session ? (
+          {status === 'loading' ? null : status === 'unauthenticated' ? (
             <Link href={`/${currentLocale}/auth/login`} className={styles.authLoginBtn}>
               {tAuth('login')}
             </Link>
