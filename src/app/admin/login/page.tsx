@@ -1,13 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import styles from '../admin.module.css';
 
 export default function AdminLoginPage() {
-  const router   = useRouter();
-  const [pw, setPw]       = useState('');
-  const [error, setError] = useState('');
+  const [pw,      setPw]      = useState('');
+  const [error,   setError]   = useState('');
   const [loading, setLoading] = useState(false);
 
   async function onSubmit(e: React.FormEvent) {
@@ -15,16 +13,24 @@ export default function AdminLoginPage() {
     setLoading(true);
     setError('');
 
-    const res = await fetch('/api/admin/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password: pw }),
-    });
+    try {
+      const res = await fetch('/api/admin/login', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ password: pw }),
+      });
 
-    if (res.ok) {
-      router.push('/admin/products');
-    } else {
-      setError('Nesprávne heslo');
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        window.location.href = '/admin/products';
+      } else {
+        setError('Nesprávne heslo');
+        setLoading(false);
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      setError('Chyba prihlásenia');
       setLoading(false);
     }
   }
