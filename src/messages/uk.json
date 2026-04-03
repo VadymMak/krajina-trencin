@@ -95,7 +95,7 @@
   },
   "basket": {
     "title":           "Кошик",
-    "items":           "{count, plural, one {товар} few {товари} other {товарів}}",
+    "items":           "{count, plural, one {{count} товар} few {{count} товари} other {{count} товарів}}",
     "empty":           "Ваш кошик порожній",
     "checkout":        "Перейти до оплати",
     "continue":        "Продовжити покупки",

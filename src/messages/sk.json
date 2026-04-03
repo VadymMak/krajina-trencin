@@ -95,7 +95,7 @@
   },
   "basket": {
     "title":           "Košík",
-    "items":           "{count, plural, one {položka} few {položky} other {položiek}}",
+    "items":           "{count, plural, one {{count} položka} few {{count} položky} other {{count} položiek}}",
     "empty":           "Váš košík je prázdny",
     "checkout":        "Prejsť k platbe",
     "continue":        "Pokračovať v nákupe",

@@ -95,7 +95,7 @@
   },
   "basket": {
     "title":           "Basket",
-    "items":           "{count, plural, one {item} other {items}}",
+    "items":           "{count, plural, one {{count} item} other {{count} items}}",
     "empty":           "Your basket is empty",
     "checkout":        "Proceed to checkout",
     "continue":        "Continue shopping",

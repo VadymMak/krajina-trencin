@@ -12,6 +12,7 @@ function fmt(price: number) {
 
 export default function BasketDrawer() {
   const t               = useTranslations('basket');
+  const tn              = useTranslations('nav');
   const locale          = useLocale();
   const { items, isOpen, total, count } = useBasket();
   const { toggleDrawer } = useBasketActions();
@@ -52,7 +53,7 @@ export default function BasketDrawer() {
                 className={styles.emptyLink}
                 onClick={() => toggleDrawer(false)}
               >
-                Produkty
+                {tn('products')}
               </Link>
             </div>
           ) : (
