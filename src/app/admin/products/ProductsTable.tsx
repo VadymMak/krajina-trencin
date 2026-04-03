@@ -11,6 +11,7 @@ interface Product {
   country: string;
   flag: string;
   price: number;
+  image: string | null;
   inStock: boolean;
   featured: boolean;
 }
@@ -77,7 +78,20 @@ export default function ProductsTable({ products, count }: Props) {
               {products.map((p) => (
                 <tr key={p.id}>
                   <td>
-                    <div className={styles.imgPlaceholder}>🏷️</div>
+                    {p.image ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={p.image}
+                        alt={p.name}
+                        style={{ width: 40, height: 40, objectFit: 'cover', borderRadius: 4, display: 'block' }}
+                        onError={(e) => {
+                          e.currentTarget.src = '/images/placeholder.webp';
+                          e.currentTarget.onerror = null;
+                        }}
+                      />
+                    ) : (
+                      <div className={styles.imgPlaceholder}>🏷️</div>
+                    )}
                   </td>
                   <td style={{ fontWeight: 500 }}>{p.name}</td>
                   <td>{p.flag} {p.country}</td>
