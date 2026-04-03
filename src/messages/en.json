@@ -109,6 +109,27 @@
     "items_2_4":       "{count} items",
     "items_5":         "{count} items"
   },
+  "auth": {
+    "login":               "Sign in",
+    "register":            "Create account",
+    "email":               "Email",
+    "password":            "Password",
+    "confirmPassword":     "Confirm password",
+    "name":                "Name",
+    "noAccount":           "No account? Register",
+    "hasAccount":          "Have an account? Sign in",
+    "logout":              "Sign out",
+    "myAccount":           "My account",
+    "adminPanel":          "Admin panel",
+    "invalidCredentials":  "Invalid email or password",
+    "emailInUse":          "Email already in use",
+    "passwordShort":       "Password must be at least 8 characters",
+    "passwordMismatch":    "Passwords do not match",
+    "registerSuccess":     "Account created! Please sign in.",
+    "welcomeBack":         "Welcome back,",
+    "orders":              "My orders",
+    "ordersEmpty":         "No orders yet"
+  },
   "checkout": {
     "title":             "Checkout",
     "summary":           "Order summary",

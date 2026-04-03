@@ -1,0 +1,57 @@
+.main {
+  background: var(--color-bg);
+  min-height: 100vh;
+  padding-top: calc(var(--header-height, 64px) + var(--spacing-lg));
+  padding-bottom: var(--spacing-xl);
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.section {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+}
+
+.sectionTitle {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+}
+
+.empty {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+}
+
+.logoutBtn {
+  padding: var(--space-3) var(--space-6);
+  background: transparent;
+  border: 1.5px solid var(--color-border-hover);
+  border-radius: var(--border-radius-md);
+  color: var(--color-text-muted);
+  font-size: var(--text-base);
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.logoutBtn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}

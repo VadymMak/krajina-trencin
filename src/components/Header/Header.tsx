@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
+import { useSession, signOut } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Header.module.css';
@@ -33,15 +34,6 @@ function CloseIcon() {
   );
 }
 
-function GlobeIcon() {
-  return (
-    <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-      <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M1 7h12M7 1c1.7 1.7 2.7 3.7 2.7 6s-1 4.3-2.7 6c-1.7-1.7-2.7-3.7-2.7-6s1-4.3 2.7-6z" stroke="currentColor" strokeWidth="1" />
-    </svg>
-  );
-}
-
 function ChevronIcon() {
   return (
     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
@@ -53,14 +45,17 @@ function ChevronIcon() {
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const [userOpen, setUserOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
   const t             = useTranslations('nav');
   const tHeader       = useTranslations('header');
+  const tAuth         = useTranslations('auth');
   const currentLocale = useLocale();
   const router        = useRouter();
   const pathname      = usePathname();
+  const { data: session } = useSession();
 
-  // Страницы без hero-секции — хедер всегда solid (тёмный фон)
   const hasHero = pathname === `/${currentLocale}` || pathname === '/';
 
   function getHref(key: string): string {
@@ -71,24 +66,15 @@ export default function Header() {
     return `/${currentLocale}`;
   }
 
-  // Единый RAF-хандлер: hide/show по направлению + transparent→solid по порогу
   useEffect(() => {
     let lastScrollY = window.scrollY;
     let rafId: number;
 
     const update = () => {
       const y = window.scrollY;
-
-      // transparent → solid при scrollY > 80
       setScrolled(y > 80);
-
-      // hide/show по направлению скролла (adriano паттерн)
       const shouldHide = y > lastScrollY && y > 100;
-      document.documentElement.style.setProperty(
-        '--header-visible',
-        shouldHide ? '0' : '1'
-      );
-
+      document.documentElement.style.setProperty('--header-visible', shouldHide ? '0' : '1');
       lastScrollY = y;
     };
 
@@ -97,14 +83,9 @@ export default function Header() {
       rafId = requestAnimationFrame(update);
     };
 
-    // Инициализация при монтировании
     update();
-
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      cancelAnimationFrame(rafId);
-    };
+    return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(rafId); };
   }, []);
 
   useEffect(() => {
@@ -113,6 +94,12 @@ export default function Header() {
     return () => document.removeEventListener('click', close);
   }, [langOpen]);
 
+  useEffect(() => {
+    const close = () => setUserOpen(false);
+    if (userOpen) document.addEventListener('click', close);
+    return () => document.removeEventListener('click', close);
+  }, [userOpen]);
+
   const switchLocale = useCallback((code: string) => {
     setLangOpen(false);
     setMenuOpen(false);
@@ -120,6 +107,12 @@ export default function Header() {
     segments[1] = code;
     router.push(segments.join('/') || '/');
   }, [pathname, router]);
+
+  const initials = session?.user?.name
+    ? session.user.name.slice(0, 1).toUpperCase()
+    : session?.user?.email?.slice(0, 1).toUpperCase() ?? '?';
+
+  const isAdmin = session?.user?.role === 'admin';
 
   return (
     <header
@@ -155,6 +148,8 @@ export default function Header() {
 
         {/* Desktop actions */}
         <div className={styles.actions}>
+
+          {/* Language switcher */}
           <div className={styles.langWrap} onClick={(e) => e.stopPropagation()}>
             <button
               className={styles.langBtn}
@@ -180,8 +175,54 @@ export default function Header() {
             )}
           </div>
 
+          {/* Basket */}
           <BasketButton />
 
+          {/* Auth */}
+          {!session ? (
+            <Link href={`/${currentLocale}/auth/login`} className={styles.authLoginBtn}>
+              {tAuth('login')}
+            </Link>
+          ) : (
+            <div className={styles.userWrap} onClick={(e) => e.stopPropagation()}>
+              <button
+                className={styles.userBtn}
+                onClick={() => setUserOpen(!userOpen)}
+                aria-label={tAuth('myAccount')}
+              >
+                <span className={styles.userAvatar}>{initials}</span>
+                {isAdmin && <span className={styles.adminBadge}>Admin</span>}
+              </button>
+              {userOpen && (
+                <div className={styles.userDropdown}>
+                  {isAdmin && (
+                    <Link
+                      href="/admin/products"
+                      className={styles.userOption}
+                      onClick={() => setUserOpen(false)}
+                    >
+                      {tAuth('adminPanel')}
+                    </Link>
+                  )}
+                  <Link
+                    href={`/${currentLocale}/account`}
+                    className={styles.userOption}
+                    onClick={() => setUserOpen(false)}
+                  >
+                    {tAuth('myAccount')}
+                  </Link>
+                  <button
+                    className={`${styles.userOption} ${styles.userOptionLogout}`}
+                    onClick={() => signOut({ callbackUrl: `/${currentLocale}` })}
+                  >
+                    {tAuth('logout')}
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* CTA */}
           <a href="#contact" className={styles.ctaBtn}>
             {t('contact')}
           </a>
@@ -211,6 +252,41 @@ export default function Header() {
                 {t(key)}
               </a>
             ))}
+            {session && isAdmin && (
+              <Link
+                href="/admin/products"
+                className={styles.mobileNavLink}
+                onClick={() => setMenuOpen(false)}
+              >
+                {tAuth('adminPanel')}
+              </Link>
+            )}
+            {session ? (
+              <>
+                <Link
+                  href={`/${currentLocale}/account`}
+                  className={styles.mobileNavLink}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {tAuth('myAccount')}
+                </Link>
+                <button
+                  className={styles.mobileNavLink}
+                  style={{ textAlign: 'left', background: 'none', border: 'none', cursor: 'pointer', width: '100%' }}
+                  onClick={() => { setMenuOpen(false); signOut({ callbackUrl: `/${currentLocale}` }); }}
+                >
+                  {tAuth('logout')}
+                </button>
+              </>
+            ) : (
+              <Link
+                href={`/${currentLocale}/auth/login`}
+                className={styles.mobileNavLink}
+                onClick={() => setMenuOpen(false)}
+              >
+                {tAuth('login')}
+              </Link>
+            )}
           </nav>
 
           <div className={styles.mobileLangs}>

@@ -109,6 +109,27 @@
     "items_2_4":       "{count} товари",
     "items_5":         "{count} товарів"
   },
+  "auth": {
+    "login":               "Увійти",
+    "register":            "Створити акаунт",
+    "email":               "E-mail",
+    "password":            "Пароль",
+    "confirmPassword":     "Підтвердити пароль",
+    "name":                "Ім'я",
+    "noAccount":           "Немає акаунту? Зареєструйтесь",
+    "hasAccount":          "Є акаунт? Увійдіть",
+    "logout":              "Вийти",
+    "myAccount":           "Мій акаунт",
+    "adminPanel":          "Панель адміна",
+    "invalidCredentials":  "Невірний e-mail або пароль",
+    "emailInUse":          "E-mail вже використовується",
+    "passwordShort":       "Пароль має бути не менше 8 символів",
+    "passwordMismatch":    "Паролі не збігаються",
+    "registerSuccess":     "Акаунт створено! Увійдіть.",
+    "welcomeBack":         "З поверненням,",
+    "orders":              "Мої замовлення",
+    "ordersEmpty":         "Замовлень ще немає"
+  },
   "checkout": {
     "title":             "Оформлення замовлення",
     "summary":           "Підсумок замовлення",

@@ -109,6 +109,27 @@
     "items_2_4":       "{count} položky",
     "items_5":         "{count} položek"
   },
+  "auth": {
+    "login":               "Přihlásit se",
+    "register":            "Vytvořit účet",
+    "email":               "E-mail",
+    "password":            "Heslo",
+    "confirmPassword":     "Potvrdit heslo",
+    "name":                "Jméno",
+    "noAccount":           "Nemáte účet? Zaregistrujte se",
+    "hasAccount":          "Máte účet? Přihlaste se",
+    "logout":              "Odhlásit se",
+    "myAccount":           "Můj účet",
+    "adminPanel":          "Admin panel",
+    "invalidCredentials":  "Neplatný e-mail nebo heslo",
+    "emailInUse":          "E-mail je již použit",
+    "passwordShort":       "Heslo musí mít alespoň 8 znaků",
+    "passwordMismatch":    "Hesla se neshodují",
+    "registerSuccess":     "Účet vytvořen! Přihlaste se.",
+    "welcomeBack":         "Vítejte zpět,",
+    "orders":              "Moje objednávky",
+    "ordersEmpty":         "Zatím žádné objednávky"
+  },
   "checkout": {
     "title":             "Pokladna",
     "summary":           "Shrnutí objednávky",

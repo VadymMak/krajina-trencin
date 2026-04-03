@@ -8,6 +8,8 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import BasketDrawer from '@/components/Basket/BasketDrawer';
 import { BasketProvider } from '@/context/BasketContext';
+import { SessionProvider } from 'next-auth/react';
+import { auth } from '@/lib/auth';
 import '../../styles/globals.css';
 
 const playfair = Playfair_Display({
@@ -73,17 +75,20 @@ export default async function LocaleLayout({
   }
 
   const messages = (await import(`../../messages/${locale}.json`)).default;
+  const session  = await auth();
 
   return (
     <html lang={locale} className={`${playfair.variable} ${sourceSans.variable}`}>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <BasketProvider>
-            <Header />
-            {children}
-            <Footer />
-            <BasketDrawer />
-          </BasketProvider>
+          <SessionProvider session={session}>
+            <BasketProvider>
+              <Header />
+              {children}
+              <Footer />
+              <BasketDrawer />
+            </BasketProvider>
+          </SessionProvider>
         </NextIntlClientProvider>
       </body>
     </html>
