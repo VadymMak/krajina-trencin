@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { stripe } from '@/lib/stripe';
+import { getStripe } from '@/lib/stripe';
 
 interface CheckoutItem {
   id:       number;
@@ -23,6 +23,10 @@ const DELIVERY_PRICE_EUR = 3.99;
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
 export async function POST(req: NextRequest) {
+  if (!process.env.STRIPE_SECRET_KEY) {
+    return NextResponse.json({ error: 'Payments not configured' }, { status: 503 });
+  }
+
   if (process.env.NEXT_PUBLIC_ENABLE_PAYMENTS !== 'true') {
     return NextResponse.json({ error: 'Payments disabled' }, { status: 403 });
   }
@@ -34,8 +38,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'No items' }, { status: 400 });
   }
 
-  const subtotal     = items.reduce((s, i) => s + i.price * i.quantity, 0);
-  const freeShipping = subtotal >= DELIVERY_THRESHOLD;
+  const stripe        = getStripe();
+  const subtotal      = items.reduce((s, i) => s + i.price * i.quantity, 0);
+  const freeShipping  = subtotal >= DELIVERY_THRESHOLD;
 
   const shippingRateData = {
     type:         'fixed_amount' as const,
