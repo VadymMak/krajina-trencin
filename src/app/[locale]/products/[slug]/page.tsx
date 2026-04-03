@@ -94,10 +94,15 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
             {/* Divider */}
             <hr className={styles.divider} />
 
-            {/* Description */}
-            {product.description && (
-              <p className={styles.description}>{product.description}</p>
-            )}
+            {/* Description — locale-aware with SK fallback */}
+            {(() => {
+              const desc =
+                locale === 'cs' ? (product.descriptionCs || product.description) :
+                locale === 'en' ? (product.descriptionEn || product.description) :
+                locale === 'uk' ? (product.descriptionUk || product.description) :
+                product.description;
+              return desc ? <p className={styles.description}>{desc}</p> : null;
+            })()}
 
             {/* Qty + Add to basket */}
             <ProductActions

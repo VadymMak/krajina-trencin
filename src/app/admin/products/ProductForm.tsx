@@ -26,32 +26,36 @@ interface ProductData {
   flag: string;
   price: number;
   description: string;
+  descriptionCs: string;
+  descriptionEn: string;
+  descriptionUk: string;
+  descriptionGenerated: boolean;
   image: string;
   inStock: boolean;
   featured: boolean;
 }
 
 interface Props {
-  initialData?: ProductData;
+  initialData?: Partial<ProductData>;
   mode: 'new' | 'edit';
 }
 
 export default function ProductForm({ initialData, mode }: Props) {
   const router = useRouter();
 
-  const [form, setForm] = useState<ProductData>(
-    initialData ?? {
-      name: '', slug: '', country: 'taliansko', flag: '🇮🇹',
-      price: 0, description: '', image: '', inStock: true, featured: false,
-    }
-  );
+  const [form, setForm] = useState<ProductData>({
+    name: '', slug: '', country: 'taliansko', flag: '🇮🇹',
+    price: 0, description: '', descriptionCs: '', descriptionEn: '',
+    descriptionUk: '', descriptionGenerated: false, image: '',
+    inStock: true, featured: false,
+    ...initialData,
+  });
 
-  const [slugManual, setSlugManual]               = useState(!!initialData?.slug);
-  const [aiAvailable, setAiAvailable]             = useState(false);
-  const [aiLoading, setAiLoading]                 = useState(false);
-  const [descGenerated, setDescGenerated]         = useState(false);
-  const [saving, setSaving]                       = useState(false);
-  const [error, setError]                         = useState('');
+  const [slugManual, setSlugManual] = useState(!!initialData?.slug);
+  const [aiAvailable, setAiAvailable] = useState(false);
+  const [aiLoading, setAiLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     fetch('/api/admin/ai-available')
@@ -80,12 +84,29 @@ export default function ProductForm({ initialData, mode }: Props) {
       const res = await fetch('/api/admin/generate-description', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: form.name, country: form.country, flag: form.flag }),
+        body: JSON.stringify({
+          name: form.name,
+          country: form.country,
+          flag: form.flag,
+          productId: form.id,
+        }),
       });
+      if (res.status === 409) {
+        // Already generated — mark so button disables
+        set('descriptionGenerated', true);
+        return;
+      }
       const data = await res.json();
       if (data.description) {
-        set('description', data.description);
-        setDescGenerated(true);
+        const d = data.description;
+        setForm((f) => ({
+          ...f,
+          description:          d.sk ?? f.description,
+          descriptionCs:        d.cs ?? f.descriptionCs,
+          descriptionEn:        d.en ?? f.descriptionEn,
+          descriptionUk:        d.uk ?? f.descriptionUk,
+          descriptionGenerated: true,
+        }));
       }
     } finally {
       setAiLoading(false);
@@ -184,29 +205,76 @@ export default function ProductForm({ initialData, mode }: Props) {
             />
           </div>
 
-          {/* Description */}
+          {/* Description — SK */}
           <div className={styles.formGroupFull}>
-            <label className={styles.formLabel}>Popis</label>
-            <div className={styles.descRow}>
-              <textarea
-                className={styles.formTextarea}
-                rows={4}
-                value={form.description}
-                onChange={(e) => set('description', e.target.value)}
-                placeholder="Krátky popis produktu…"
-              />
+            <label className={styles.formLabel}>
+              Popis
               {aiAvailable && (
                 <button
                   type="button"
                   className={styles.btnAi}
+                  style={{ marginLeft: 12 }}
                   onClick={generateAiDescription}
-                  disabled={aiLoading || descGenerated || !form.name}
-                  title={descGenerated ? 'Už vygenerované' : 'Generovať popis pomocou AI'}
+                  disabled={aiLoading || form.descriptionGenerated || !form.name}
+                  title={form.descriptionGenerated ? 'Už vygenerované' : 'Generovať popis vo všetkých jazykoch'}
                 >
-                  {aiLoading ? '…' : '✨'}{' '}
-                  {descGenerated ? 'Vygenerované' : 'Generovať AI'}
+                  {aiLoading ? (
+                    <span style={{
+                      display: 'inline-block', width: 12, height: 12,
+                      border: '2px solid rgba(109,40,217,0.3)',
+                      borderTop: '2px solid #6d28d9', borderRadius: '50%',
+                      animation: 'spin 0.8s linear infinite',
+                    }} />
+                  ) : '✨'}{' '}
+                  {form.descriptionGenerated ? 'Vygenerované' : aiLoading ? 'Generujem…' : 'Generovať AI'}
                 </button>
               )}
+            </label>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div>
+                <span style={{ fontSize: 12, color: '#666', marginBottom: 4, display: 'block' }}>🇸🇰 Slovenčina</span>
+                <textarea
+                  className={styles.formTextarea}
+                  rows={3}
+                  value={form.description}
+                  onChange={(e) => set('description', e.target.value)}
+                  placeholder="Krátky popis produktu…"
+                />
+              </div>
+
+              <div>
+                <span style={{ fontSize: 12, color: '#666', marginBottom: 4, display: 'block' }}>🇨🇿 Čeština</span>
+                <textarea
+                  className={styles.formTextarea}
+                  rows={3}
+                  value={form.descriptionCs}
+                  onChange={(e) => set('descriptionCs', e.target.value)}
+                  placeholder="Krátký popis produktu…"
+                />
+              </div>
+
+              <div>
+                <span style={{ fontSize: 12, color: '#666', marginBottom: 4, display: 'block' }}>🇬🇧 English</span>
+                <textarea
+                  className={styles.formTextarea}
+                  rows={3}
+                  value={form.descriptionEn}
+                  onChange={(e) => set('descriptionEn', e.target.value)}
+                  placeholder="Short product description…"
+                />
+              </div>
+
+              <div>
+                <span style={{ fontSize: 12, color: '#666', marginBottom: 4, display: 'block' }}>🇺🇦 Українська</span>
+                <textarea
+                  className={styles.formTextarea}
+                  rows={3}
+                  value={form.descriptionUk}
+                  onChange={(e) => set('descriptionUk', e.target.value)}
+                  placeholder="Короткий опис продукту…"
+                />
+              </div>
             </div>
           </div>
 

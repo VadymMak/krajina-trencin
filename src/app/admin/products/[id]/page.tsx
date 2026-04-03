@@ -11,16 +11,20 @@ export default async function AdminEditProductPage({ params }: { params: Params 
   if (!product) notFound();
 
   const initialData = {
-    id:          product.id,
-    name:        product.name,
-    slug:        product.slug,
-    country:     product.country,
-    flag:        product.flag,
-    price:       product.price,
-    description: product.description ?? '',
-    image:       product.image ?? '',
-    inStock:     product.inStock,
-    featured:    product.featured,
+    id:                   product.id,
+    name:                 product.name,
+    slug:                 product.slug,
+    country:              product.country,
+    flag:                 product.flag,
+    price:                product.price,
+    description:          product.description ?? '',
+    descriptionCs:        product.descriptionCs ?? '',
+    descriptionEn:        product.descriptionEn ?? '',
+    descriptionUk:        product.descriptionUk ?? '',
+    descriptionGenerated: product.descriptionGenerated,
+    image:                product.image ?? '',
+    inStock:              product.inStock,
+    featured:             product.featured,
   };
 
   return (

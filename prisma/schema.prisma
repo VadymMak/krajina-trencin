@@ -11,8 +11,12 @@ model Product {
   id          Int         @id @default(autoincrement())
   slug        String      @unique
   name        String
-  description String?
-  price       Float
+  description          String?
+  descriptionCs        String?
+  descriptionEn        String?
+  descriptionUk        String?
+  descriptionGenerated Boolean  @default(false)
+  price                Float
   country     String
   flag        String
   image       String?

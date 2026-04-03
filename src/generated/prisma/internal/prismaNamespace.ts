@@ -1122,6 +1122,10 @@ export const ProductScalarFieldEnum = {
   slug: 'slug',
   name: 'name',
   description: 'description',
+  descriptionCs: 'descriptionCs',
+  descriptionEn: 'descriptionEn',
+  descriptionUk: 'descriptionUk',
+  descriptionGenerated: 'descriptionGenerated',
   price: 'price',
   country: 'country',
   flag: 'flag',
@@ -1294,6 +1298,13 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1304,13 +1315,6 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
  * Reference to a field of type 'Float[]'
  */
 export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 

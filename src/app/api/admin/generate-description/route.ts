@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import { prisma } from '@/lib/prisma';
 
 export async function POST(request: NextRequest) {
   const cookieStore = await cookies();
@@ -13,7 +14,18 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'OpenAI not configured' }, { status: 503 });
   }
 
-  const { name, country, flag } = await request.json();
+  const { name, country, flag, productId } = await request.json();
+
+  // If product already has generated descriptions, return 409
+  if (productId) {
+    const product = await prisma.product.findUnique({
+      where: { id: productId },
+      select: { descriptionGenerated: true },
+    });
+    if (product?.descriptionGenerated) {
+      return NextResponse.json({ error: 'Already generated' }, { status: 409 });
+    }
+  }
 
   const res = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
@@ -26,15 +38,20 @@ export async function POST(request: NextRequest) {
       messages: [
         {
           role: 'system',
-          content: 'You are a product description writer for a gourmet food store.',
+          content:
+            'You are a product description writer for a gourmet food store. ' +
+            'Always respond with a valid JSON object containing exactly 4 keys: sk, cs, en, uk. ' +
+            'Each value is a short appetizing product description (2-3 sentences). ' +
+            'sk = Slovak, cs = Czech, en = English, uk = Ukrainian.',
         },
         {
           role: 'user',
-          content: `Write a short appetizing description (2-3 sentences) for: ${name} ${flag} from ${country}. Reply in Slovak language only.`,
+          content: `Write descriptions for: ${name} ${flag} from ${country}. Return JSON only.`,
         },
       ],
-      max_tokens: 150,
+      max_tokens: 600,
       temperature: 0.7,
+      response_format: { type: 'json_object' },
     }),
   });
 
@@ -43,6 +60,28 @@ export async function POST(request: NextRequest) {
   }
 
   const data = await res.json();
-  const description = data.choices?.[0]?.message?.content?.trim() ?? '';
-  return NextResponse.json({ description });
+  const raw = data.choices?.[0]?.message?.content?.trim() ?? '{}';
+
+  let descriptions: { sk?: string; cs?: string; en?: string; uk?: string } = {};
+  try {
+    descriptions = JSON.parse(raw);
+  } catch {
+    return NextResponse.json({ error: 'Invalid AI response' }, { status: 502 });
+  }
+
+  // Persist to DB if productId provided
+  if (productId) {
+    await prisma.product.update({
+      where: { id: productId },
+      data: {
+        description:          descriptions.sk ?? '',
+        descriptionCs:        descriptions.cs ?? null,
+        descriptionEn:        descriptions.en ?? null,
+        descriptionUk:        descriptions.uk ?? null,
+        descriptionGenerated: true,
+      },
+    });
+  }
+
+  return NextResponse.json({ description: descriptions });
 }

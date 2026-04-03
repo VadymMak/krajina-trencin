@@ -41,6 +41,10 @@ export type ProductMinAggregateOutputType = {
   slug: string | null
   name: string | null
   description: string | null
+  descriptionCs: string | null
+  descriptionEn: string | null
+  descriptionUk: string | null
+  descriptionGenerated: boolean | null
   price: number | null
   country: string | null
   flag: string | null
@@ -56,6 +60,10 @@ export type ProductMaxAggregateOutputType = {
   slug: string | null
   name: string | null
   description: string | null
+  descriptionCs: string | null
+  descriptionEn: string | null
+  descriptionUk: string | null
+  descriptionGenerated: boolean | null
   price: number | null
   country: string | null
   flag: string | null
@@ -71,6 +79,10 @@ export type ProductCountAggregateOutputType = {
   slug: number
   name: number
   description: number
+  descriptionCs: number
+  descriptionEn: number
+  descriptionUk: number
+  descriptionGenerated: number
   price: number
   country: number
   flag: number
@@ -98,6 +110,10 @@ export type ProductMinAggregateInputType = {
   slug?: true
   name?: true
   description?: true
+  descriptionCs?: true
+  descriptionEn?: true
+  descriptionUk?: true
+  descriptionGenerated?: true
   price?: true
   country?: true
   flag?: true
@@ -113,6 +129,10 @@ export type ProductMaxAggregateInputType = {
   slug?: true
   name?: true
   description?: true
+  descriptionCs?: true
+  descriptionEn?: true
+  descriptionUk?: true
+  descriptionGenerated?: true
   price?: true
   country?: true
   flag?: true
@@ -128,6 +148,10 @@ export type ProductCountAggregateInputType = {
   slug?: true
   name?: true
   description?: true
+  descriptionCs?: true
+  descriptionEn?: true
+  descriptionUk?: true
+  descriptionGenerated?: true
   price?: true
   country?: true
   flag?: true
@@ -230,6 +254,10 @@ export type ProductGroupByOutputType = {
   slug: string
   name: string
   description: string | null
+  descriptionCs: string | null
+  descriptionEn: string | null
+  descriptionUk: string | null
+  descriptionGenerated: boolean
   price: number
   country: string
   flag: string
@@ -268,6 +296,10 @@ export type ProductWhereInput = {
   slug?: Prisma.StringFilter<"Product"> | string
   name?: Prisma.StringFilter<"Product"> | string
   description?: Prisma.StringNullableFilter<"Product"> | string | null
+  descriptionCs?: Prisma.StringNullableFilter<"Product"> | string | null
+  descriptionEn?: Prisma.StringNullableFilter<"Product"> | string | null
+  descriptionUk?: Prisma.StringNullableFilter<"Product"> | string | null
+  descriptionGenerated?: Prisma.BoolFilter<"Product"> | boolean
   price?: Prisma.FloatFilter<"Product"> | number
   country?: Prisma.StringFilter<"Product"> | string
   flag?: Prisma.StringFilter<"Product"> | string
@@ -284,6 +316,10 @@ export type ProductOrderByWithRelationInput = {
   slug?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  descriptionCs?: Prisma.SortOrderInput | Prisma.SortOrder
+  descriptionEn?: Prisma.SortOrderInput | Prisma.SortOrder
+  descriptionUk?: Prisma.SortOrderInput | Prisma.SortOrder
+  descriptionGenerated?: Prisma.SortOrder
   price?: Prisma.SortOrder
   country?: Prisma.SortOrder
   flag?: Prisma.SortOrder
@@ -303,6 +339,10 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
   name?: Prisma.StringFilter<"Product"> | string
   description?: Prisma.StringNullableFilter<"Product"> | string | null
+  descriptionCs?: Prisma.StringNullableFilter<"Product"> | string | null
+  descriptionEn?: Prisma.StringNullableFilter<"Product"> | string | null
+  descriptionUk?: Prisma.StringNullableFilter<"Product"> | string | null
+  descriptionGenerated?: Prisma.BoolFilter<"Product"> | boolean
   price?: Prisma.FloatFilter<"Product"> | number
   country?: Prisma.StringFilter<"Product"> | string
   flag?: Prisma.StringFilter<"Product"> | string
@@ -319,6 +359,10 @@ export type ProductOrderByWithAggregationInput = {
   slug?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  descriptionCs?: Prisma.SortOrderInput | Prisma.SortOrder
+  descriptionEn?: Prisma.SortOrderInput | Prisma.SortOrder
+  descriptionUk?: Prisma.SortOrderInput | Prisma.SortOrder
+  descriptionGenerated?: Prisma.SortOrder
   price?: Prisma.SortOrder
   country?: Prisma.SortOrder
   flag?: Prisma.SortOrder
@@ -342,6 +386,10 @@ export type ProductScalarWhereWithAggregatesInput = {
   slug?: Prisma.StringWithAggregatesFilter<"Product"> | string
   name?: Prisma.StringWithAggregatesFilter<"Product"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  descriptionCs?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  descriptionEn?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  descriptionUk?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  descriptionGenerated?: Prisma.BoolWithAggregatesFilter<"Product"> | boolean
   price?: Prisma.FloatWithAggregatesFilter<"Product"> | number
   country?: Prisma.StringWithAggregatesFilter<"Product"> | string
   flag?: Prisma.StringWithAggregatesFilter<"Product"> | string
@@ -356,6 +404,10 @@ export type ProductCreateInput = {
   slug: string
   name: string
   description?: string | null
+  descriptionCs?: string | null
+  descriptionEn?: string | null
+  descriptionUk?: string | null
+  descriptionGenerated?: boolean
   price: number
   country: string
   flag: string
@@ -372,6 +424,10 @@ export type ProductUncheckedCreateInput = {
   slug: string
   name: string
   description?: string | null
+  descriptionCs?: string | null
+  descriptionEn?: string | null
+  descriptionUk?: string | null
+  descriptionGenerated?: boolean
   price: number
   country: string
   flag: string
@@ -387,6 +443,10 @@ export type ProductUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionCs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionUk?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionGenerated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   country?: Prisma.StringFieldUpdateOperationsInput | string
   flag?: Prisma.StringFieldUpdateOperationsInput | string
@@ -403,6 +463,10 @@ export type ProductUncheckedUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionCs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionUk?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionGenerated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   country?: Prisma.StringFieldUpdateOperationsInput | string
   flag?: Prisma.StringFieldUpdateOperationsInput | string
@@ -419,6 +483,10 @@ export type ProductCreateManyInput = {
   slug: string
   name: string
   description?: string | null
+  descriptionCs?: string | null
+  descriptionEn?: string | null
+  descriptionUk?: string | null
+  descriptionGenerated?: boolean
   price: number
   country: string
   flag: string
@@ -433,6 +501,10 @@ export type ProductUpdateManyMutationInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionCs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionUk?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionGenerated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   country?: Prisma.StringFieldUpdateOperationsInput | string
   flag?: Prisma.StringFieldUpdateOperationsInput | string
@@ -448,6 +520,10 @@ export type ProductUncheckedUpdateManyInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionCs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionUk?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionGenerated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   country?: Prisma.StringFieldUpdateOperationsInput | string
   flag?: Prisma.StringFieldUpdateOperationsInput | string
@@ -463,6 +539,10 @@ export type ProductCountOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  descriptionCs?: Prisma.SortOrder
+  descriptionEn?: Prisma.SortOrder
+  descriptionUk?: Prisma.SortOrder
+  descriptionGenerated?: Prisma.SortOrder
   price?: Prisma.SortOrder
   country?: Prisma.SortOrder
   flag?: Prisma.SortOrder
@@ -483,6 +563,10 @@ export type ProductMaxOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  descriptionCs?: Prisma.SortOrder
+  descriptionEn?: Prisma.SortOrder
+  descriptionUk?: Prisma.SortOrder
+  descriptionGenerated?: Prisma.SortOrder
   price?: Prisma.SortOrder
   country?: Prisma.SortOrder
   flag?: Prisma.SortOrder
@@ -498,6 +582,10 @@ export type ProductMinOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  descriptionCs?: Prisma.SortOrder
+  descriptionEn?: Prisma.SortOrder
+  descriptionUk?: Prisma.SortOrder
+  descriptionGenerated?: Prisma.SortOrder
   price?: Prisma.SortOrder
   country?: Prisma.SortOrder
   flag?: Prisma.SortOrder
@@ -526,16 +614,16 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type FloatFieldUpdateOperationsInput = {
   set?: number
   increment?: number
   decrement?: number
   multiply?: number
   divide?: number
-}
-
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -568,6 +656,10 @@ export type ProductCreateWithoutOrderItemsInput = {
   slug: string
   name: string
   description?: string | null
+  descriptionCs?: string | null
+  descriptionEn?: string | null
+  descriptionUk?: string | null
+  descriptionGenerated?: boolean
   price: number
   country: string
   flag: string
@@ -583,6 +675,10 @@ export type ProductUncheckedCreateWithoutOrderItemsInput = {
   slug: string
   name: string
   description?: string | null
+  descriptionCs?: string | null
+  descriptionEn?: string | null
+  descriptionUk?: string | null
+  descriptionGenerated?: boolean
   price: number
   country: string
   flag: string
@@ -613,6 +709,10 @@ export type ProductUpdateWithoutOrderItemsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionCs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionUk?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionGenerated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   country?: Prisma.StringFieldUpdateOperationsInput | string
   flag?: Prisma.StringFieldUpdateOperationsInput | string
@@ -628,6 +728,10 @@ export type ProductUncheckedUpdateWithoutOrderItemsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionCs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionUk?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionGenerated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   country?: Prisma.StringFieldUpdateOperationsInput | string
   flag?: Prisma.StringFieldUpdateOperationsInput | string
@@ -674,6 +778,10 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   slug?: boolean
   name?: boolean
   description?: boolean
+  descriptionCs?: boolean
+  descriptionEn?: boolean
+  descriptionUk?: boolean
+  descriptionGenerated?: boolean
   price?: boolean
   country?: boolean
   flag?: boolean
@@ -691,6 +799,10 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   slug?: boolean
   name?: boolean
   description?: boolean
+  descriptionCs?: boolean
+  descriptionEn?: boolean
+  descriptionUk?: boolean
+  descriptionGenerated?: boolean
   price?: boolean
   country?: boolean
   flag?: boolean
@@ -706,6 +818,10 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   slug?: boolean
   name?: boolean
   description?: boolean
+  descriptionCs?: boolean
+  descriptionEn?: boolean
+  descriptionUk?: boolean
+  descriptionGenerated?: boolean
   price?: boolean
   country?: boolean
   flag?: boolean
@@ -721,6 +837,10 @@ export type ProductSelectScalar = {
   slug?: boolean
   name?: boolean
   description?: boolean
+  descriptionCs?: boolean
+  descriptionEn?: boolean
+  descriptionUk?: boolean
+  descriptionGenerated?: boolean
   price?: boolean
   country?: boolean
   flag?: boolean
@@ -731,7 +851,7 @@ export type ProductSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "name" | "description" | "price" | "country" | "flag" | "image" | "inStock" | "featured" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "name" | "description" | "descriptionCs" | "descriptionEn" | "descriptionUk" | "descriptionGenerated" | "price" | "country" | "flag" | "image" | "inStock" | "featured" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orderItems?: boolean | Prisma.Product$orderItemsArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
@@ -749,6 +869,10 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     slug: string
     name: string
     description: string | null
+    descriptionCs: string | null
+    descriptionEn: string | null
+    descriptionUk: string | null
+    descriptionGenerated: boolean
     price: number
     country: string
     flag: string
@@ -1185,6 +1309,10 @@ export interface ProductFieldRefs {
   readonly slug: Prisma.FieldRef<"Product", 'String'>
   readonly name: Prisma.FieldRef<"Product", 'String'>
   readonly description: Prisma.FieldRef<"Product", 'String'>
+  readonly descriptionCs: Prisma.FieldRef<"Product", 'String'>
+  readonly descriptionEn: Prisma.FieldRef<"Product", 'String'>
+  readonly descriptionUk: Prisma.FieldRef<"Product", 'String'>
+  readonly descriptionGenerated: Prisma.FieldRef<"Product", 'Boolean'>
   readonly price: Prisma.FieldRef<"Product", 'Float'>
   readonly country: Prisma.FieldRef<"Product", 'String'>
   readonly flag: Prisma.FieldRef<"Product", 'String'>
