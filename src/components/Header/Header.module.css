@@ -43,10 +43,6 @@
   transition: filter var(--transition);
 }
 
-.headerScrolled .logoImg {
-  filter: none;
-}
-
 /* ─── Desktop nav ──────────────────────────────────────────────────────────── */
 
 .nav {

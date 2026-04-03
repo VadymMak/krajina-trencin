@@ -10,7 +10,7 @@
   border: none;
   cursor: pointer;
   padding: var(--space-2);
-  color: inherit;
+  color: var(--color-white);
   display: flex;
   align-items: center;
   justify-content: center;
