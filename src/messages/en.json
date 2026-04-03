@@ -103,6 +103,32 @@
     "freeShipping":    "Free delivery!",
     "freeShippingFrom":"Free delivery from 60 €"
   },
+  "checkout": {
+    "title":             "Checkout",
+    "summary":           "Order summary",
+    "subtotal":          "Subtotal",
+    "delivery":          "Delivery",
+    "deliveryFree":      "Free",
+    "deliveryPrice":     "€3.99",
+    "total":             "Total",
+    "pay":               "Pay by card",
+    "secure":            "Secure payment",
+    "emptyRedirect":     "Basket is empty",
+    "thankYou":          "Thank you for your order!",
+    "orderConfirmed":    "Your payment was received. We will send a confirmation to your email.",
+    "continueShopping":  "Continue shopping",
+    "cancelTitle":       "Payment cancelled",
+    "cancelText":        "Your basket has been preserved. You can go back and try again.",
+    "backToBasket":      "Back to basket",
+    "fields": {
+      "name":    "Full name",
+      "email":   "Email",
+      "phone":   "Phone",
+      "address": "Address",
+      "city":    "City",
+      "zip":     "ZIP / Postcode"
+    }
+  },
   "productDetail": {
     "back":        "Back to products",
     "inStock":     "In stock",

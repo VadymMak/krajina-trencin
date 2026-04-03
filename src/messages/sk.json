@@ -103,6 +103,32 @@
     "freeShipping":    "Doprava zadarmo!",
     "freeShippingFrom":"Doprava zadarmo od 60 €"
   },
+  "checkout": {
+    "title":             "Pokladňa",
+    "summary":           "Zhrnutie objednávky",
+    "subtotal":          "Medzisúčet",
+    "delivery":          "Doprava",
+    "deliveryFree":      "Zadarmo",
+    "deliveryPrice":     "3,99 €",
+    "total":             "Spolu",
+    "pay":               "Zaplatiť kartou",
+    "secure":            "Bezpečná platba",
+    "emptyRedirect":     "Košík je prázdny",
+    "thankYou":          "Ďakujeme za objednávku!",
+    "orderConfirmed":    "Vaša platba bola prijatá. Potvrdenie pošleme na e-mail.",
+    "continueShopping":  "Pokračovať v nakupovaní",
+    "cancelTitle":       "Platba zrušená",
+    "cancelText":        "Váš košík bol zachovaný. Môžete sa vrátiť a skúsiť znova.",
+    "backToBasket":      "Späť do košíka",
+    "fields": {
+      "name":    "Meno a priezvisko",
+      "email":   "E-mail",
+      "phone":   "Telefón",
+      "address": "Adresa",
+      "city":    "Mesto",
+      "zip":     "PSČ"
+    }
+  },
   "productDetail": {
     "back":        "Späť na produkty",
     "inStock":     "Na sklade",
