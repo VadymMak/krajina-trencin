@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Header.module.css';
+import BasketButton from '@/components/Basket/BasketButton';
 
 const LOCALE_OPTIONS = [
   { code: 'sk', flag: '🇸🇰', label: 'SK' },
@@ -178,6 +179,8 @@ export default function Header() {
               </div>
             )}
           </div>
+
+          {process.env.NEXT_PUBLIC_ENABLE_BASKET === 'true' && <BasketButton />}
 
           <a href="#contact" className={styles.ctaBtn}>
             {t('contact')}

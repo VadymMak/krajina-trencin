@@ -4,13 +4,23 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { PLACEHOLDER_PRODUCTS, COUNTRY_FLAGS } from '@/data/products';
+import { useBasketActions } from '@/context/BasketContext';
 import styles from './FeaturedProducts.module.css';
 
 const FEATURED = PLACEHOLDER_PRODUCTS.slice(0, 8);
 
+function parsePrice(price: string): number {
+  return parseFloat(price.replace(',', '.').replace(/[^0-9.]/g, ''));
+}
+
+function toSlug(name: string): string {
+  return name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+}
+
 export default function FeaturedProducts() {
   const t      = useTranslations('featured');
   const locale = useLocale();
+  const { addItem, toggleDrawer } = useBasketActions();
 
   return (
     <section className={styles.section}>
@@ -43,6 +53,24 @@ export default function FeaturedProducts() {
                 <span className={styles.flag} aria-hidden="true">
                   {COUNTRY_FLAGS[product.country]}
                 </span>
+                <button
+                  className={styles.quickAdd}
+                  aria-label={t('quickAdd')}
+                  onClick={() => {
+                    addItem({
+                      id:      parseInt(product.id),
+                      slug:    toSlug(product.name),
+                      name:    product.name,
+                      price:   parsePrice(product.price),
+                      image:   product.image ?? null,
+                      flag:    COUNTRY_FLAGS[product.country],
+                      country: product.country,
+                    }, 1);
+                    toggleDrawer(true);
+                  }}
+                >
+                  +
+                </button>
               </div>
               <div className={styles.body}>
                 <span className={styles.name}>{product.name}</span>

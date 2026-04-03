@@ -1,0 +1,147 @@
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--color-border);
+  position: relative;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+/* Image */
+.imageWrap {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--placeholder-bg);
+  position: relative;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  background: var(--color-bg-warm);
+}
+
+/* Info */
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.meta {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.name {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text);
+  line-height: 1.3;
+  margin-bottom: var(--space-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.unitPrice {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.lineTotal {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+/* Qty row */
+.qtyRow {
+  display: flex;
+  align-items: center;
+  border: 0.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.qtyBtn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-warm);
+  border: none;
+  cursor: pointer;
+  font-size: var(--text-base);
+  color: var(--color-text);
+  transition: background var(--transition);
+}
+
+.qtyBtn:hover {
+  background: var(--color-border);
+}
+
+.qtyNum {
+  width: 32px;
+  height: 28px;
+  text-align: center;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text);
+  border: none;
+  border-left: 0.5px solid var(--color-border);
+  border-right: 0.5px solid var(--color-border);
+  background: var(--color-bg-card);
+  outline: none;
+  -moz-appearance: textfield;
+}
+
+.qtyNum::-webkit-outer-spin-button,
+.qtyNum::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+/* Remove */
+.removeBtn {
+  position: absolute;
+  top: var(--space-4);
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1;
+  padding: 2px 4px;
+  transition: color var(--transition);
+}
+
+.removeBtn:hover {
+  color: var(--color-text);
+}

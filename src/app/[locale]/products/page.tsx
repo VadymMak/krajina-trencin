@@ -3,11 +3,12 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
+import { useBasketActions } from '@/context/BasketContext';
 import ProductsFilter, {
   FILTER_CATEGORIES,
   type FilterCategory,
 } from '@/components/ProductsFilter/ProductsFilter';
-import { PLACEHOLDER_PRODUCTS } from '@/data/products';
+import { PLACEHOLDER_PRODUCTS, COUNTRY_FLAGS } from '@/data/products';
 import styles from './products.module.css';
 
 const ALL = 'all' as const;
@@ -94,11 +95,41 @@ function toSlug(name: string): string {
   return name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 }
 
-function ProductCard({ name, price }: { id: string; name: string; country: FilterCategory; price: string }) {
+function parsePrice(price: string): number {
+  return parseFloat(price.replace(',', '.').replace(/[^0-9.]/g, ''));
+}
+
+function ProductCard({ id, name, country, price }: { id: string; name: string; country: FilterCategory; price: string }) {
   const locale = useLocale();
+  const t = useTranslations('featured');
+  const { addItem, toggleDrawer } = useBasketActions();
+
   return (
     <Link href={`/${locale}/products/${toSlug(name)}`} className={styles.card}>
-      <div className={styles.cardImage} aria-hidden="true" />
+      <div className={styles.cardImageWrap}>
+        <div className={styles.cardImage} aria-hidden="true" />
+        {country !== 'all' && (
+          <button
+            className={styles.quickAdd}
+            aria-label={t('quickAdd')}
+            onClick={(e) => {
+              e.preventDefault();
+              addItem({
+                id:      parseInt(id),
+                slug:    toSlug(name),
+                name,
+                price:   parsePrice(price),
+                image:   null,
+                flag:    COUNTRY_FLAGS[country],
+                country,
+              }, 1);
+              toggleDrawer(true);
+            }}
+          >
+            +
+          </button>
+        )}
+      </div>
       <div className={styles.cardBody}>
         <span className={styles.cardName}>{name}</span>
         <span className={styles.cardPrice}>{price}</span>

@@ -80,7 +80,8 @@
     "label":    "Best sellers",
     "title":    "Fresh specialities",
     "subtitle": "Authentic products sourced directly from producers",
-    "cta":      "View all products"
+    "cta":      "View all products",
+    "quickAdd": "Add to basket"
   },
   "trust": {
     "products_num":   "500+",
@@ -91,6 +92,16 @@
     "shipping_label": "free shipping",
     "store_icon":     "📍",
     "store_label":    "Store in Trenčín"
+  },
+  "basket": {
+    "title":           "Basket",
+    "items":           "{count, plural, one {item} other {items}}",
+    "empty":           "Your basket is empty",
+    "checkout":        "Proceed to checkout",
+    "continue":        "Continue shopping",
+    "total":           "Total",
+    "freeShipping":    "Free delivery!",
+    "freeShippingFrom":"Free delivery from 60 €"
   },
   "productDetail": {
     "back":        "Back to products",

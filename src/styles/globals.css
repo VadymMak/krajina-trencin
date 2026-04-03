@@ -85,6 +85,7 @@
   --transition:       0.25s ease;
   --header-visible:   1;
   --header-height:    64px;
+  --z-modal:          1000;
 
   /* Spacing aliases */
   --space-1:  0.25rem;

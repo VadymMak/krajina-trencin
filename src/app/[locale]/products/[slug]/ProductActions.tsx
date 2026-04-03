@@ -1,15 +1,25 @@
 'use client';
 
 import { useState } from 'react';
+import { useBasketActions } from '@/context/BasketContext';
 import styles from './page.module.css';
 
 interface Props {
-  product: { id: number; name: string; price: number; slug: string };
+  product: {
+    id: number;
+    slug: string;
+    name: string;
+    price: number;
+    image: string | null;
+    flag: string;
+    country: string;
+  };
   addLabel: string;
 }
 
 export default function ProductActions({ product, addLabel }: Props) {
   const [qty, setQty] = useState(1);
+  const { addItem, toggleDrawer } = useBasketActions();
 
   function dec() { setQty((q) => Math.max(1, q - 1)); }
   function inc() { setQty((q) => Math.min(99, q + 1)); }
@@ -19,7 +29,16 @@ export default function ProductActions({ product, addLabel }: Props) {
   }
 
   function addToBasket() {
-    console.log('addToBasket', { product, quantity: qty });
+    addItem({
+      id:      product.id,
+      slug:    product.slug,
+      name:    product.name,
+      price:   product.price,
+      image:   product.image,
+      flag:    product.flag,
+      country: product.country,
+    }, qty);
+    toggleDrawer(true);
   }
 
   return (

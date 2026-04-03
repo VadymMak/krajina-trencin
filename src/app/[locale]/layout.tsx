@@ -6,6 +6,8 @@ import { routing } from '@/i18n/routing';
 import { getTranslations } from 'next-intl/server';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
+import BasketDrawer from '@/components/Basket/BasketDrawer';
+import { BasketProvider } from '@/context/BasketContext';
 import '../../styles/globals.css';
 
 const playfair = Playfair_Display({
@@ -76,9 +78,12 @@ export default async function LocaleLayout({
     <html lang={locale} className={`${playfair.variable} ${sourceSans.variable}`}>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <Header />
-          {children}
-          <Footer />
+          <BasketProvider>
+            <Header />
+            {children}
+            <Footer />
+            <BasketDrawer />
+          </BasketProvider>
         </NextIntlClientProvider>
       </body>
     </html>

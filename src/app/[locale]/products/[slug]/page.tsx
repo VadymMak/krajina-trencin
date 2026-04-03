@@ -101,7 +101,15 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
 
             {/* Qty + Add to basket */}
             <ProductActions
-              product={{ id: product.id, name: product.name, price: product.price, slug: product.slug }}
+              product={{
+                id:      product.id,
+                slug:    product.slug,
+                name:    product.name,
+                price:   product.price,
+                image:   product.image ?? null,
+                flag:    product.flag,
+                country: product.country,
+              }}
               addLabel={t('addToBasket')}
             />
 

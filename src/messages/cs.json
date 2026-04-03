@@ -80,7 +80,8 @@
     "label":    "Nejprodávanější produkty",
     "title":    "Čerstvé speciality",
     "subtitle": "Autentické potraviny vybrané přímo od výrobců",
-    "cta":      "Zobrazit všechny produkty"
+    "cta":      "Zobrazit všechny produkty",
+    "quickAdd": "Přidat do košíku"
   },
   "trust": {
     "products_num":   "500+",
@@ -91,6 +92,16 @@
     "shipping_label": "doprava zdarma",
     "store_icon":     "📍",
     "store_label":    "Prodejna Trenčín"
+  },
+  "basket": {
+    "title":           "Košík",
+    "items":           "{count, plural, one {položka} few {položky} other {položek}}",
+    "empty":           "Váš košík je prázdný",
+    "checkout":        "Přejít k platbě",
+    "continue":        "Pokračovat v nákupu",
+    "total":           "Celkem",
+    "freeShipping":    "Doprava zdarma!",
+    "freeShippingFrom":"Doprava zdarma od 60 €"
   },
   "productDetail": {
     "back":        "Zpět na produkty",
