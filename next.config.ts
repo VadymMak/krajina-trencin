@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
       bodySizeLimit: '20mb',
     },
   },
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: '*.public.blob.vercel-storage.com' },
+    ],
+  },
   redirects: async () => [
     { source: '/', destination: '/sk', permanent: false },
   ],
