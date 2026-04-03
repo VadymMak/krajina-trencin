@@ -9,6 +9,7 @@
   /* Colors — brand */
   --color-accent:       #8B5E3C;
   --color-accent-hover: #7A5234;
+  --color-accent-dark:  #6B4528;
   --color-accent-light: rgba(139, 94, 60, 0.8);
   --color-green:        #4A7C59;
   --color-green-hover:  #3D6849;
@@ -93,6 +94,7 @@
   --space-5:  1.25rem;
   --space-6:  1.5rem;
   --space-8:  2rem;
+  --space-12: 3rem;
   --space-16: 4rem;
   --space-20: 5rem;
 

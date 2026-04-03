@@ -92,6 +92,14 @@
     "store_icon":     "📍",
     "store_label":    "Store in Trenčín"
   },
+  "productDetail": {
+    "back":        "Back to products",
+    "inStock":     "In stock",
+    "outOfStock":  "Unavailable",
+    "addToBasket": "Add to basket",
+    "delivery":    "Order by 12:00 — delivered tomorrow",
+    "related":     "You might also like"
+  },
   "footer": {
     "tagline":           "Krajina means land — we bring you the flavours of the world",
     "nav_title":         "Main menu",

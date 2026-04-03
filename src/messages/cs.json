@@ -92,6 +92,14 @@
     "store_icon":     "📍",
     "store_label":    "Prodejna Trenčín"
   },
+  "productDetail": {
+    "back":        "Zpět na produkty",
+    "inStock":     "Skladem",
+    "outOfStock":  "Nedostupné",
+    "addToBasket": "Přidat do košíku",
+    "delivery":    "Objednejte do 12:00 — doručíme zítra",
+    "related":     "Mohlo by vás zajímat"
+  },
   "footer": {
     "tagline":           "Krajina znamená zem — přinášíme vám chutě světa",
     "nav_title":         "Hlavní menu",

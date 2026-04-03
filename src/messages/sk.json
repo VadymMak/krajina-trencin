@@ -92,6 +92,14 @@
     "store_icon":     "📍",
     "store_label":    "Kamenná predajňa Trenčín"
   },
+  "productDetail": {
+    "back":        "Späť na produkty",
+    "inStock":     "Na sklade",
+    "outOfStock":  "Nedostupné",
+    "addToBasket": "Pridať do košíka",
+    "delivery":    "Objednajte do 12:00 — doručíme zajtra",
+    "related":     "Mohlo by vás zaujímať"
+  },
   "footer": {
     "tagline":           "Krajina znamená zem — prinášame vám chute sveta",
     "nav_title":         "Hlavné menu",

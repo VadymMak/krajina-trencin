@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useTranslations, useLocale } from 'next-intl';
 import ProductsFilter, {
   FILTER_CATEGORIES,
   type FilterCategory,
@@ -89,14 +90,19 @@ export default function ProductsPage() {
   );
 }
 
+function toSlug(name: string): string {
+  return name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+}
+
 function ProductCard({ name, price }: { id: string; name: string; country: FilterCategory; price: string }) {
+  const locale = useLocale();
   return (
-    <div className={styles.card}>
+    <Link href={`/${locale}/products/${toSlug(name)}`} className={styles.card}>
       <div className={styles.cardImage} aria-hidden="true" />
       <div className={styles.cardBody}>
         <span className={styles.cardName}>{name}</span>
         <span className={styles.cardPrice}>{price}</span>
       </div>
-    </div>
+    </Link>
   );
 }
