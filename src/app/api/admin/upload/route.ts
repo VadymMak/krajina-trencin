@@ -4,8 +4,16 @@ import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 import sharp from 'sharp';
 
-const MAX_SIZE = 5 * 1024 * 1024; // 5 MB
+const MAX_SIZE = 20 * 1024 * 1024; // 20 MB
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '20mb',
+    },
+  },
+};
 
 export async function POST(request: NextRequest) {
   const cookieStore = await cookies();
@@ -27,15 +35,21 @@ export async function POST(request: NextRequest) {
   }
 
   if (file.size > MAX_SIZE) {
-    return NextResponse.json({ error: 'File too large. Maximum size is 5 MB.' }, { status: 400 });
+    return NextResponse.json({ error: 'File too large. Maximum size is 20 MB.' }, { status: 400 });
   }
 
   const buffer = Buffer.from(await file.arrayBuffer());
 
-  const processedBuffer = await sharp(buffer)
-    .resize(800, 800, { fit: 'inside', withoutEnlargement: true })
-    .webp({ quality: 85 })
-    .toBuffer();
+  let processedBuffer: Buffer;
+  try {
+    processedBuffer = await sharp(buffer)
+      .resize(800, 800, { fit: 'inside', withoutEnlargement: true })
+      .webp({ quality: 85 })
+      .toBuffer();
+  } catch (sharpError) {
+    console.error('Sharp processing error:', sharpError);
+    return NextResponse.json({ error: 'Image processing failed' }, { status: 500 });
+  }
 
   const originalName = file.name
     .replace(/\.[^.]+$/, '')

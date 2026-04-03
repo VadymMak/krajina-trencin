@@ -62,6 +62,7 @@ export default function ProductForm({ initialData, mode }: Props) {
   const [imagePreview, setImagePreview] = useState(initialData?.image ?? '');
   const [uploading, setUploading] = useState(false);
   const [uploadStatus, setUploadStatus] = useState<'idle' | 'ok' | 'err'>('idle');
+  const [uploadError, setUploadError] = useState('');
   const [uploadStats, setUploadStats] = useState<{ originalSize: number; optimizedSize: number; savings: number } | null>(null);
   const [dragOver, setDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -91,19 +92,25 @@ export default function ProductForm({ initialData, mode }: Props) {
     setUploading(true);
     setUploadStatus('idle');
     setUploadStats(null);
+    setUploadError('');
     try {
       const fd = new FormData();
       fd.append('file', file);
       fd.append('country', form.country);
       const res = await fetch('/api/admin/upload', { method: 'POST', body: fd });
       const data = await res.json();
-      if (!res.ok) { setUploadStatus('err'); return; }
+      if (!res.ok) {
+        setUploadStatus('err');
+        setUploadError(data.error || t.uploadError);
+        return;
+      }
       setImagePreview(data.url);
       set('image', data.url);
       setUploadStatus('ok');
       setUploadStats({ originalSize: data.originalSize, optimizedSize: data.optimizedSize, savings: data.savings });
     } catch {
       setUploadStatus('err');
+      setUploadError(t.uploadError);
     } finally {
       setUploading(false);
     }
@@ -279,7 +286,7 @@ export default function ProductForm({ initialData, mode }: Props) {
                   <span className={`${styles.uploadStatus} ${styles.uploadStatusOk}`}>{t.uploaded}</span>
                 )}
                 {uploadStatus === 'err' && (
-                  <span className={`${styles.uploadStatus} ${styles.uploadStatusErr}`}>✗ Chyba nahrávania</span>
+                  <span className={`${styles.uploadStatus} ${styles.uploadStatusErr}`}>✗ {uploadError || t.uploadError}</span>
                 )}
 
                 <span className={styles.uploadHint}>JPEG, PNG, WebP · max 5 MB</span>
