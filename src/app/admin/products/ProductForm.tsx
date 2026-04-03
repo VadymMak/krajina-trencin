@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../admin.module.css';
+import { useAdminTranslations } from '../i18n/useAdminTranslations';
 
 const COUNTRIES: { value: string; label: string; flag: string }[] = [
   { value: 'taliansko',  label: 'Taliansko',  flag: '🇮🇹' },
@@ -41,7 +42,8 @@ interface Props {
 }
 
 export default function ProductForm({ initialData, mode }: Props) {
-  const router = useRouter();
+  const router    = useRouter();
+  const { t }     = useAdminTranslations();
 
   const [form, setForm] = useState<ProductData>({
     name: '', slug: '', country: 'taliansko', flag: '🇮🇹',
@@ -95,18 +97,11 @@ export default function ProductForm({ initialData, mode }: Props) {
       fd.append('country', form.country);
       const res = await fetch('/api/admin/upload', { method: 'POST', body: fd });
       const data = await res.json();
-      if (!res.ok) {
-        setUploadStatus('err');
-        return;
-      }
+      if (!res.ok) { setUploadStatus('err'); return; }
       setImagePreview(data.url);
       set('image', data.url);
       setUploadStatus('ok');
-      setUploadStats({
-        originalSize:  data.originalSize,
-        optimizedSize: data.optimizedSize,
-        savings:       data.savings,
-      });
+      setUploadStats({ originalSize: data.originalSize, optimizedSize: data.optimizedSize, savings: data.savings });
     } catch {
       setUploadStatus('err');
     } finally {
@@ -120,18 +115,9 @@ export default function ProductForm({ initialData, mode }: Props) {
       const res = await fetch('/api/admin/generate-description', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: form.name,
-          country: form.country,
-          flag: form.flag,
-          productId: form.id,
-        }),
+        body: JSON.stringify({ name: form.name, country: form.country, flag: form.flag, productId: form.id }),
       });
-      if (res.status === 409) {
-        // Already generated — mark so button disables
-        set('descriptionGenerated', true);
-        return;
-      }
+      if (res.status === 409) { set('descriptionGenerated', true); return; }
       const data = await res.json();
       if (data.description) {
         const d = data.description;
@@ -153,22 +139,19 @@ export default function ProductForm({ initialData, mode }: Props) {
     e.preventDefault();
     setSaving(true);
     setError('');
-
     const url    = mode === 'new' ? '/api/products' : `/api/products/${form.id}`;
     const method = mode === 'new' ? 'POST' : 'PUT';
-
     const res = await fetch(url, {
       method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...form, price: Number(form.price) }),
     });
-
     if (res.ok) {
       router.push('/admin/products');
       router.refresh();
     } else {
       const data = await res.json();
-      setError(data.error ?? 'Chyba pri ukladaní');
+      setError(data.error ?? 'Error');
       setSaving(false);
     }
   }
@@ -180,18 +163,19 @@ export default function ProductForm({ initialData, mode }: Props) {
 
           {/* Name */}
           <div className={styles.formGroup}>
-            <label className={styles.formLabel}>Názov *</label>
+            <label className={styles.formLabel}>{t.name} *</label>
             <input
               className={styles.formInput}
               value={form.name}
               onChange={(e) => onNameChange(e.target.value)}
               required
             />
+            <p style={{ fontSize: 12, color: '#888', margin: 0 }}>{t.marketLanguage}</p>
           </div>
 
           {/* Slug */}
           <div className={styles.formGroup}>
-            <label className={styles.formLabel}>Slug *</label>
+            <label className={styles.formLabel}>{t.slug} *</label>
             <input
               className={styles.formInput}
               value={form.slug}
@@ -202,23 +186,21 @@ export default function ProductForm({ initialData, mode }: Props) {
 
           {/* Country */}
           <div className={styles.formGroup}>
-            <label className={styles.formLabel}>Krajina *</label>
+            <label className={styles.formLabel}>{t.country} *</label>
             <select
               className={styles.formSelect}
               value={form.country}
               onChange={(e) => onCountryChange(e.target.value)}
             >
               {COUNTRIES.map((c) => (
-                <option key={c.value} value={c.value}>
-                  {c.flag} {c.label}
-                </option>
+                <option key={c.value} value={c.value}>{c.flag} {c.label}</option>
               ))}
             </select>
           </div>
 
           {/* Price */}
           <div className={styles.formGroup}>
-            <label className={styles.formLabel}>Cena (€) *</label>
+            <label className={styles.formLabel}>{t.price} (€) *</label>
             <input
               className={styles.formInput}
               type="number"
@@ -232,10 +214,8 @@ export default function ProductForm({ initialData, mode }: Props) {
 
           {/* Image upload */}
           <div className={styles.formGroupFull}>
-            <label className={styles.formLabel}>Obrázok</label>
+            <label className={styles.formLabel}>{t.image}</label>
             <div className={styles.imageUploadWrap}>
-
-              {/* Preview box — click or drop */}
               <div
                 className={`${styles.imagePreviewBox} ${dragOver ? styles.dragOver : ''}`}
                 onClick={() => fileInputRef.current?.click()}
@@ -254,12 +234,11 @@ export default function ProductForm({ initialData, mode }: Props) {
                 ) : (
                   <div className={styles.imagePreviewPlaceholder}>
                     <span>🖼️</span>
-                    <span>Kliknúť alebo pretiahnuť</span>
+                    <span>Kliknúť / drag&amp;drop</span>
                   </div>
                 )}
               </div>
 
-              {/* Hidden file input */}
               <input
                 ref={fileInputRef}
                 type="file"
@@ -287,41 +266,39 @@ export default function ProductForm({ initialData, mode }: Props) {
                       animation: 'spin 0.8s linear infinite',
                     }} />
                   ) : '📁'}{' '}
-                  {uploading ? 'Nahrávam…' : 'Vybrať obrázok'}
+                  {uploading ? t.uploading : t.uploadImage}
                 </button>
 
                 {uploadStatus === 'ok' && uploadStats && (
                   <span className={`${styles.uploadStatus} ${styles.uploadStatusOk}`}>
-                    ✓ Nahraté — ušetrené {uploadStats.savings}%{' '}
+                    {t.uploaded} — ušetrené {uploadStats.savings}%{' '}
                     ({(uploadStats.originalSize / 1024 / 1024).toFixed(1)} MB → {(uploadStats.optimizedSize / 1024 / 1024).toFixed(1)} MB)
                   </span>
                 )}
                 {uploadStatus === 'ok' && !uploadStats && (
-                  <span className={`${styles.uploadStatus} ${styles.uploadStatusOk}`}>✓ Obrázok nahraný</span>
+                  <span className={`${styles.uploadStatus} ${styles.uploadStatusOk}`}>{t.uploaded}</span>
                 )}
                 {uploadStatus === 'err' && (
                   <span className={`${styles.uploadStatus} ${styles.uploadStatusErr}`}>✗ Chyba nahrávania</span>
                 )}
 
                 <span className={styles.uploadHint}>JPEG, PNG, WebP · max 5 MB</span>
-
-                {/* Keep URL input hidden for manual override */}
                 <input
                   type="text"
                   className={styles.formInput}
                   value={form.image}
                   onChange={(e) => { set('image', e.target.value); setImagePreview(e.target.value); }}
-                  placeholder="alebo vložiť URL ručne…"
+                  placeholder="alebo URL…"
                   style={{ fontSize: 12 }}
                 />
               </div>
             </div>
           </div>
 
-          {/* Description — SK */}
+          {/* Descriptions */}
           <div className={styles.formGroupFull}>
             <label className={styles.formLabel}>
-              Popis
+              {t.description}
               {aiAvailable && (
                 <button
                   type="button"
@@ -329,7 +306,7 @@ export default function ProductForm({ initialData, mode }: Props) {
                   style={{ marginLeft: 12 }}
                   onClick={generateAiDescription}
                   disabled={aiLoading || form.descriptionGenerated || !form.name}
-                  title={form.descriptionGenerated ? 'Už vygenerované' : 'Generovať popis vo všetkých jazykoch'}
+                  title={form.descriptionGenerated ? t.alreadyGenerated : t.generateAI}
                 >
                   {aiLoading ? (
                     <span style={{
@@ -339,61 +316,35 @@ export default function ProductForm({ initialData, mode }: Props) {
                       animation: 'spin 0.8s linear infinite',
                     }} />
                   ) : '✨'}{' '}
-                  {form.descriptionGenerated ? 'Vygenerované' : aiLoading ? 'Generujem…' : 'Generovať AI'}
+                  {form.descriptionGenerated ? t.alreadyGenerated : aiLoading ? t.generating : t.generateAI}
                 </button>
               )}
             </label>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <div>
-                <span style={{ fontSize: 12, color: '#666', marginBottom: 4, display: 'block' }}>🇸🇰 Slovenčina</span>
-                <textarea
-                  className={styles.formTextarea}
-                  rows={3}
-                  value={form.description}
-                  onChange={(e) => set('description', e.target.value)}
-                  placeholder="Krátky popis produktu…"
-                />
-              </div>
-
-              <div>
-                <span style={{ fontSize: 12, color: '#666', marginBottom: 4, display: 'block' }}>🇨🇿 Čeština</span>
-                <textarea
-                  className={styles.formTextarea}
-                  rows={3}
-                  value={form.descriptionCs}
-                  onChange={(e) => set('descriptionCs', e.target.value)}
-                  placeholder="Krátký popis produktu…"
-                />
-              </div>
-
-              <div>
-                <span style={{ fontSize: 12, color: '#666', marginBottom: 4, display: 'block' }}>🇬🇧 English</span>
-                <textarea
-                  className={styles.formTextarea}
-                  rows={3}
-                  value={form.descriptionEn}
-                  onChange={(e) => set('descriptionEn', e.target.value)}
-                  placeholder="Short product description…"
-                />
-              </div>
-
-              <div>
-                <span style={{ fontSize: 12, color: '#666', marginBottom: 4, display: 'block' }}>🇺🇦 Українська</span>
-                <textarea
-                  className={styles.formTextarea}
-                  rows={3}
-                  value={form.descriptionUk}
-                  onChange={(e) => set('descriptionUk', e.target.value)}
-                  placeholder="Короткий опис продукту…"
-                />
-              </div>
+              {[
+                { label: t.descriptionSk, field: 'description'   as const, placeholder: 'Krátky popis produktu…' },
+                { label: t.descriptionCs, field: 'descriptionCs' as const, placeholder: 'Krátký popis produktu…' },
+                { label: t.descriptionEn, field: 'descriptionEn' as const, placeholder: 'Short product description…' },
+                { label: t.descriptionUk, field: 'descriptionUk' as const, placeholder: 'Короткий опис продукту…' },
+              ].map(({ label, field, placeholder }) => (
+                <div key={field}>
+                  <span style={{ fontSize: 12, color: '#666', marginBottom: 4, display: 'block' }}>{label}</span>
+                  <textarea
+                    className={styles.formTextarea}
+                    rows={3}
+                    value={form[field]}
+                    onChange={(e) => set(field, e.target.value)}
+                    placeholder={placeholder}
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Checkboxes */}
+          {/* Availability */}
           <div className={styles.formGroup}>
-            <label className={styles.formLabel}>Dostupnosť</label>
+            <label className={styles.formLabel}>{t.stock}</label>
             <label className={styles.formCheckboxRow}>
               <input
                 className={styles.formCheckbox}
@@ -401,12 +352,13 @@ export default function ProductForm({ initialData, mode }: Props) {
                 checked={form.inStock}
                 onChange={(e) => set('inStock', e.target.checked)}
               />
-              Na sklade
+              {t.inStock}
             </label>
           </div>
 
+          {/* Featured */}
           <div className={styles.formGroup}>
-            <label className={styles.formLabel}>Odporúčané</label>
+            <label className={styles.formLabel}>{t.featured}</label>
             <label className={styles.formCheckboxRow}>
               <input
                 className={styles.formCheckbox}
@@ -414,7 +366,7 @@ export default function ProductForm({ initialData, mode }: Props) {
                 checked={form.featured}
                 onChange={(e) => set('featured', e.target.checked)}
               />
-              Zobraziť v odporúčaných
+              {t.featured}
             </label>
           </div>
 
@@ -424,9 +376,9 @@ export default function ProductForm({ initialData, mode }: Props) {
 
         <div className={styles.formActions}>
           <button className={styles.btnPrimary} type="submit" disabled={saving}>
-            {saving ? 'Ukladám…' : mode === 'new' ? 'Pridať produkt' : 'Uložiť zmeny'}
+            {saving ? t.saving : mode === 'new' ? t.addProduct : t.save}
           </button>
-          <a href="/admin/products" className={styles.btnSecondary}>Zrušiť</a>
+          <a href="/admin/products" className={styles.btnSecondary}>{t.cancel}</a>
         </div>
       </div>
     </form>

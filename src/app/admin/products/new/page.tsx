@@ -1,12 +1,10 @@
 import ProductForm from '../ProductForm';
-import styles from '../../admin.module.css';
+import { ProductFormTitle } from '../ProductFormTitle';
 
 export default function AdminNewProductPage() {
   return (
     <>
-      <div className={styles.pageHeader}>
-        <h1 className={styles.pageTitle}>Nový produkt</h1>
-      </div>
+      <ProductFormTitle mode="new" />
       <ProductForm mode="new" />
     </>
   );

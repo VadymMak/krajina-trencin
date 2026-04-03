@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import ProductForm from '../ProductForm';
-import styles from '../../admin.module.css';
+import { ProductFormTitle } from '../ProductFormTitle';
 
 type Params = Promise<{ id: string }>;
 
@@ -29,9 +29,7 @@ export default async function AdminEditProductPage({ params }: { params: Params 
 
   return (
     <>
-      <div className={styles.pageHeader}>
-        <h1 className={styles.pageTitle}>Upraviť: {product.name}</h1>
-      </div>
+      <ProductFormTitle mode="edit" name={product.name} />
       <ProductForm mode="edit" initialData={initialData} />
     </>
   );

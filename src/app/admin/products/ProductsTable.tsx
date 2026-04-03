@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from '../admin.module.css';
+import { useAdminTranslations } from '../i18n/useAdminTranslations';
 
 interface Product {
   id: number;
@@ -14,11 +15,17 @@ interface Product {
   featured: boolean;
 }
 
-export default function ProductsTable({ products }: { products: Product[] }) {
+interface Props {
+  products: Product[];
+  count: number;
+}
+
+export default function ProductsTable({ products, count }: Props) {
   const router = useRouter();
+  const { t }  = useAdminTranslations();
 
   async function deleteProduct(id: number, name: string) {
-    if (!confirm(`Vymazať produkt "${name}"?`)) return;
+    if (!confirm(`${t.delete} "${name}"?`)) return;
     await fetch(`/api/products/${id}`, { method: 'DELETE' });
     router.refresh();
   }
@@ -41,68 +48,77 @@ export default function ProductsTable({ products }: { products: Product[] }) {
     router.refresh();
   }
 
-  if (products.length === 0) {
-    return <div className={styles.empty}>Žiadne produkty. Pridajte prvý produkt.</div>;
-  }
-
   return (
-    <table className={styles.table}>
-      <thead>
-        <tr>
-          <th>Obrázok</th>
-          <th>Názov</th>
-          <th>Krajina</th>
-          <th>Cena</th>
-          <th>Sklad</th>
-          <th>Odporúčané</th>
-          <th>Akcie</th>
-        </tr>
-      </thead>
-      <tbody>
-        {products.map((p) => (
-          <tr key={p.id}>
-            <td>
-              <div className={styles.imgPlaceholder}>🏷️</div>
-            </td>
-            <td style={{ fontWeight: 500 }}>{p.name}</td>
-            <td>{p.flag} {p.country}</td>
-            <td>{p.price.toFixed(2).replace('.', ',')} €</td>
-            <td>
-              <button
-                className={p.inStock ? styles.badgeGreen : styles.badgeRed}
-                onClick={() => toggleStock(p.id, p.inStock)}
-                style={{ cursor: 'pointer', border: 'none', borderRadius: 4 }}
-                title="Kliknite pre zmenu"
-              >
-                {p.inStock ? 'Na sklade' : 'Nedostupné'}
-              </button>
-            </td>
-            <td style={{ textAlign: 'center' }}>
-              <button
-                onClick={() => toggleFeatured(p.id, p.featured)}
-                style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 18 }}
-                title={p.featured ? 'Odstraniť z odporúčaných' : 'Pridať do odporúčaných'}
-              >
-                {p.featured ? '⭐' : '☆'}
-              </button>
-            </td>
-            <td>
-              <div className={styles.actions}>
-                <Link href={`/admin/products/${p.id}`} className={styles.btnIcon} title="Upraviť">
-                  ✏️
-                </Link>
-                <button
-                  className={`${styles.btnIcon} ${styles.btnIconDanger}`}
-                  onClick={() => deleteProduct(p.id, p.name)}
-                  title="Vymazať"
-                >
-                  🗑️
-                </button>
-              </div>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <>
+      <div className={styles.pageHeader}>
+        <h1 className={styles.pageTitle}>{t.products} ({count})</h1>
+        <Link href="/admin/products/new" className={styles.btnPrimary}>
+          {t.addProduct}
+        </Link>
+      </div>
+
+      <div className={styles.card}>
+        {products.length === 0 ? (
+          <div className={styles.empty}>{t.noProducts}</div>
+        ) : (
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>{t.image}</th>
+                <th>{t.name}</th>
+                <th>{t.country}</th>
+                <th>{t.price}</th>
+                <th>{t.stock}</th>
+                <th>{t.featured}</th>
+                <th>{t.actions}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.map((p) => (
+                <tr key={p.id}>
+                  <td>
+                    <div className={styles.imgPlaceholder}>🏷️</div>
+                  </td>
+                  <td style={{ fontWeight: 500 }}>{p.name}</td>
+                  <td>{p.flag} {p.country}</td>
+                  <td>{p.price.toFixed(2).replace('.', ',')} €</td>
+                  <td>
+                    <button
+                      className={p.inStock ? styles.badgeGreen : styles.badgeRed}
+                      onClick={() => toggleStock(p.id, p.inStock)}
+                      style={{ cursor: 'pointer', border: 'none', borderRadius: 4 }}
+                    >
+                      {p.inStock ? t.inStock : t.outOfStock}
+                    </button>
+                  </td>
+                  <td style={{ textAlign: 'center' }}>
+                    <button
+                      onClick={() => toggleFeatured(p.id, p.featured)}
+                      style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 18 }}
+                    >
+                      {p.featured ? '⭐' : '☆'}
+                    </button>
+                  </td>
+                  <td>
+                    <div className={styles.actions}>
+                      <Link href={`/admin/products/${p.id}`} className={styles.btnIcon} title={t.edit}>
+                        ✏️
+                      </Link>
+                      <button
+                        className={`${styles.btnIcon} ${styles.btnIconDanger}`}
+                        onClick={() => deleteProduct(p.id, p.name)}
+                        title={t.delete}
+                      >
+                        🗑️
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </>
   );
 }
