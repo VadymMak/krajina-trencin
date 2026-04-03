@@ -60,6 +60,7 @@ export default function ProductForm({ initialData, mode }: Props) {
   const [imagePreview, setImagePreview] = useState(initialData?.image ?? '');
   const [uploading, setUploading] = useState(false);
   const [uploadStatus, setUploadStatus] = useState<'idle' | 'ok' | 'err'>('idle');
+  const [uploadStats, setUploadStats] = useState<{ originalSize: number; optimizedSize: number; savings: number } | null>(null);
   const [dragOver, setDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -87,6 +88,7 @@ export default function ProductForm({ initialData, mode }: Props) {
   async function handleImageUpload(file: File) {
     setUploading(true);
     setUploadStatus('idle');
+    setUploadStats(null);
     try {
       const fd = new FormData();
       fd.append('file', file);
@@ -100,6 +102,11 @@ export default function ProductForm({ initialData, mode }: Props) {
       setImagePreview(data.url);
       set('image', data.url);
       setUploadStatus('ok');
+      setUploadStats({
+        originalSize:  data.originalSize,
+        optimizedSize: data.optimizedSize,
+        savings:       data.savings,
+      });
     } catch {
       setUploadStatus('err');
     } finally {
@@ -283,7 +290,13 @@ export default function ProductForm({ initialData, mode }: Props) {
                   {uploading ? 'Nahrávam…' : 'Vybrať obrázok'}
                 </button>
 
-                {uploadStatus === 'ok' && (
+                {uploadStatus === 'ok' && uploadStats && (
+                  <span className={`${styles.uploadStatus} ${styles.uploadStatusOk}`}>
+                    ✓ Nahraté — ušetrené {uploadStats.savings}%{' '}
+                    ({(uploadStats.originalSize / 1024 / 1024).toFixed(1)} MB → {(uploadStats.optimizedSize / 1024 / 1024).toFixed(1)} MB)
+                  </span>
+                )}
+                {uploadStatus === 'ok' && !uploadStats && (
                   <span className={`${styles.uploadStatus} ${styles.uploadStatusOk}`}>✓ Obrázok nahraný</span>
                 )}
                 {uploadStatus === 'err' && (

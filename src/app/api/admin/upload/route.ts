@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
+import sharp from 'sharp';
 
 const MAX_SIZE = 5 * 1024 * 1024; // 5 MB
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
@@ -30,12 +31,27 @@ export async function POST(request: NextRequest) {
   }
 
   const buffer = Buffer.from(await file.arrayBuffer());
-  const safeName = file.name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9._-]/g, '');
-  const filename = `${Date.now()}-${safeName}`;
+
+  const processedBuffer = await sharp(buffer)
+    .resize(800, 800, { fit: 'inside', withoutEnlargement: true })
+    .webp({ quality: 85 })
+    .toBuffer();
+
+  const originalName = file.name
+    .replace(/\.[^.]+$/, '')
+    .replace(/\s+/g, '-')
+    .toLowerCase()
+    .replace(/[^a-z0-9-]/g, '');
+  const filename = `${Date.now()}-${originalName}.webp`;
 
   const dir = path.join(process.cwd(), 'public', 'images', 'products', country);
   await mkdir(dir, { recursive: true });
-  await writeFile(path.join(dir, filename), buffer);
+  await writeFile(path.join(dir, filename), processedBuffer);
 
-  return NextResponse.json({ url: `/images/products/${country}/${filename}` });
+  return NextResponse.json({
+    url:           `/images/products/${country}/${filename}`,
+    originalSize:  buffer.length,
+    optimizedSize: processedBuffer.length,
+    savings:       Math.round((1 - processedBuffer.length / buffer.length) * 100),
+  });
 }
