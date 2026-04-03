@@ -26,7 +26,7 @@ export default function AdminSidebar() {
 
   async function logout() {
     await fetch('/api/admin/logout', { method: 'POST' });
-    router.push('/admin/login');
+    window.location.href = '/';
   }
 
   return (
