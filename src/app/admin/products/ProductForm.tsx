@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../admin.module.css';
 
@@ -57,6 +57,12 @@ export default function ProductForm({ initialData, mode }: Props) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
 
+  const [imagePreview, setImagePreview] = useState(initialData?.image ?? '');
+  const [uploading, setUploading] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState<'idle' | 'ok' | 'err'>('idle');
+  const [dragOver, setDragOver] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     fetch('/api/admin/ai-available')
       .then((r) => r.json())
@@ -76,6 +82,29 @@ export default function ProductForm({ initialData, mode }: Props) {
     const c = COUNTRIES.find((c) => c.value === country);
     set('country', country);
     if (c) set('flag', c.flag);
+  }
+
+  async function handleImageUpload(file: File) {
+    setUploading(true);
+    setUploadStatus('idle');
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      fd.append('country', form.country);
+      const res = await fetch('/api/admin/upload', { method: 'POST', body: fd });
+      const data = await res.json();
+      if (!res.ok) {
+        setUploadStatus('err');
+        return;
+      }
+      setImagePreview(data.url);
+      set('image', data.url);
+      setUploadStatus('ok');
+    } catch {
+      setUploadStatus('err');
+    } finally {
+      setUploading(false);
+    }
   }
 
   async function generateAiDescription() {
@@ -194,15 +223,86 @@ export default function ProductForm({ initialData, mode }: Props) {
             />
           </div>
 
-          {/* Image URL */}
+          {/* Image upload */}
           <div className={styles.formGroupFull}>
-            <label className={styles.formLabel}>Obrázok (URL)</label>
-            <input
-              className={styles.formInput}
-              value={form.image}
-              onChange={(e) => set('image', e.target.value)}
-              placeholder="https://..."
-            />
+            <label className={styles.formLabel}>Obrázok</label>
+            <div className={styles.imageUploadWrap}>
+
+              {/* Preview box — click or drop */}
+              <div
+                className={`${styles.imagePreviewBox} ${dragOver ? styles.dragOver : ''}`}
+                onClick={() => fileInputRef.current?.click()}
+                onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+                onDragLeave={() => setDragOver(false)}
+                onDrop={(e) => {
+                  e.preventDefault();
+                  setDragOver(false);
+                  const file = e.dataTransfer.files?.[0];
+                  if (file) handleImageUpload(file);
+                }}
+              >
+                {imagePreview ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={imagePreview} alt="preview" />
+                ) : (
+                  <div className={styles.imagePreviewPlaceholder}>
+                    <span>🖼️</span>
+                    <span>Kliknúť alebo pretiahnuť</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Hidden file input */}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                style={{ display: 'none' }}
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) handleImageUpload(file);
+                  e.target.value = '';
+                }}
+              />
+
+              <div className={styles.imageUploadControls}>
+                <button
+                  type="button"
+                  className={styles.btnUpload}
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploading}
+                >
+                  {uploading ? (
+                    <span style={{
+                      display: 'inline-block', width: 12, height: 12,
+                      border: '2px solid rgba(255,255,255,0.3)',
+                      borderTop: '2px solid white', borderRadius: '50%',
+                      animation: 'spin 0.8s linear infinite',
+                    }} />
+                  ) : '📁'}{' '}
+                  {uploading ? 'Nahrávam…' : 'Vybrať obrázok'}
+                </button>
+
+                {uploadStatus === 'ok' && (
+                  <span className={`${styles.uploadStatus} ${styles.uploadStatusOk}`}>✓ Obrázok nahraný</span>
+                )}
+                {uploadStatus === 'err' && (
+                  <span className={`${styles.uploadStatus} ${styles.uploadStatusErr}`}>✗ Chyba nahrávania</span>
+                )}
+
+                <span className={styles.uploadHint}>JPEG, PNG, WebP · max 5 MB</span>
+
+                {/* Keep URL input hidden for manual override */}
+                <input
+                  type="text"
+                  className={styles.formInput}
+                  value={form.image}
+                  onChange={(e) => { set('image', e.target.value); setImagePreview(e.target.value); }}
+                  placeholder="alebo vložiť URL ručne…"
+                  style={{ fontSize: 12 }}
+                />
+              </div>
+            </div>
           </div>
 
           {/* Description — SK */}
