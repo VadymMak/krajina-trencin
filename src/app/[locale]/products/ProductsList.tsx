@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { useBasketActions } from '@/context/BasketContext';
@@ -116,19 +115,16 @@ function ProductCard({ product }: { product: DbProduct }) {
   return (
     <Link href={`/${locale}/products/${product.slug}`} className={styles.card}>
       <div className={styles.cardImageWrap}>
-        {product.image ? (
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            className={styles.cardImage}
-            sizes="(max-width: 640px) 50vw, 25vw"
-            unoptimized={product.image.startsWith('https://')}
-            style={{ objectFit: 'cover' }}
-          />
-        ) : (
-          <div className={styles.cardImage} aria-hidden="true" />
-        )}
+        <div className={styles.cardImage}>
+          {product.image && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={product.image}
+              alt={product.name}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+          )}
+        </div>
         <button
           className={styles.quickAdd}
           aria-label={t('quickAdd')}
