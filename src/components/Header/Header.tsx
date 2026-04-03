@@ -180,7 +180,7 @@ export default function Header() {
             )}
           </div>
 
-          {process.env.NEXT_PUBLIC_ENABLE_BASKET === 'true' && <BasketButton />}
+          <BasketButton />
 
           <a href="#contact" className={styles.ctaBtn}>
             {t('contact')}
