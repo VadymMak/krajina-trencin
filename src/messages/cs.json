@@ -95,13 +95,19 @@
   },
   "basket": {
     "title":           "Košík",
-    "items":           "{count, plural, one {{count} položka} few {{count} položky} other {{count} položek}}",
     "empty":           "Váš košík je prázdný",
+    "emptySubtext":    "Přidejte produkty a začněte nakupovat",
+    "continueShopping":"Pokračovat v nákupu",
     "checkout":        "Přejít k platbě",
-    "continue":        "Pokračovat v nákupu",
     "total":           "Celkem",
-    "freeShipping":    "Doprava zdarma!",
-    "freeShippingFrom":"Doprava zdarma od 60 €"
+    "freeShipping":    "✓ Doprava zdarma!",
+    "freeShippingFrom":"Doprava zdarma od 60 €",
+    "removeItem":      "Odstranit",
+    "perPiece":        "/ ks",
+    "items_0":         "prázdný",
+    "items_1":         "1 položka",
+    "items_2_4":       "{count} položky",
+    "items_5":         "{count} položek"
   },
   "checkout": {
     "title":             "Pokladna",

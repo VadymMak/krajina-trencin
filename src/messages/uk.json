@@ -95,13 +95,19 @@
   },
   "basket": {
     "title":           "Кошик",
-    "items":           "{count, plural, one {{count} товар} few {{count} товари} other {{count} товарів}}",
     "empty":           "Ваш кошик порожній",
+    "emptySubtext":    "Додайте товари та починайте покупки",
+    "continueShopping":"Продовжити покупки",
     "checkout":        "Перейти до оплати",
-    "continue":        "Продовжити покупки",
     "total":           "Разом",
-    "freeShipping":    "Безкоштовна доставка!",
-    "freeShippingFrom":"Безкоштовна доставка від 60 €"
+    "freeShipping":    "✓ Безкоштовна доставка!",
+    "freeShippingFrom":"Безкоштовна доставка від 60 €",
+    "removeItem":      "Видалити",
+    "perPiece":        "/ шт",
+    "items_0":         "порожній",
+    "items_1":         "1 товар",
+    "items_2_4":       "{count} товари",
+    "items_5":         "{count} товарів"
   },
   "checkout": {
     "title":             "Оформлення замовлення",

@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useBasket, useBasketActions } from '@/context/BasketContext';
 import styles from './BasketButton.module.css';
 
@@ -25,6 +26,7 @@ function BagIcon() {
 }
 
 export default function BasketButton() {
+  const t                = useTranslations('basket');
   const { count }        = useBasket();
   const { toggleDrawer } = useBasketActions();
 
@@ -33,7 +35,7 @@ export default function BasketButton() {
       <button
         className={styles.btn}
         onClick={() => toggleDrawer(true)}
-        aria-label={`Košík${count > 0 ? ` (${count})` : ''}`}
+        aria-label={t('title')}
       >
         <BagIcon />
       </button>

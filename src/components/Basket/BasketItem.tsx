@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { useBasketActions } from '@/context/BasketContext';
 import type { BasketItem as IBasketItem } from '@/context/BasketContext';
 import styles from './BasketItem.module.css';
@@ -10,7 +11,8 @@ function fmt(price: number) {
 }
 
 export default function BasketItem({ item }: { item: IBasketItem }) {
-  const { updateQty, removeItem } = useBasketActions();
+  const t                          = useTranslations('basket');
+  const { updateQty, removeItem }  = useBasketActions();
 
   return (
     <div className={styles.item}>
@@ -18,7 +20,7 @@ export default function BasketItem({ item }: { item: IBasketItem }) {
       <button
         className={styles.removeBtn}
         onClick={() => removeItem(item.id)}
-        aria-label="Odstrániť"
+        aria-label={t('removeItem')}
       >
         ×
       </button>
@@ -36,7 +38,7 @@ export default function BasketItem({ item }: { item: IBasketItem }) {
       <div className={styles.info}>
         <p className={styles.meta}>{item.flag} {item.country}</p>
         <p className={styles.name}>{item.name}</p>
-        <p className={styles.unitPrice}>{fmt(item.price)} / ks</p>
+        <p className={styles.unitPrice}>{fmt(item.price)} {t('perPiece')}</p>
       </div>
 
       {/* Controls */}

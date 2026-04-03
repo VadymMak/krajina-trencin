@@ -12,12 +12,18 @@ function fmt(price: number) {
 
 export default function BasketDrawer() {
   const t               = useTranslations('basket');
-  const tn              = useTranslations('nav');
   const locale          = useLocale();
   const { items, isOpen, total, count } = useBasket();
   const { toggleDrawer } = useBasketActions();
 
   if (!isOpen) return null;
+
+  function getCountLabel(n: number): string {
+    if (n === 0) return t('items_0');
+    if (n === 1) return t('items_1');
+    if (n <= 4)  return t('items_2_4').replace('{count}', n.toString());
+    return t('items_5').replace('{count}', n.toString());
+  }
 
   return (
     <>
@@ -31,13 +37,13 @@ export default function BasketDrawer() {
         <div className={styles.head}>
           <div className={styles.headLeft}>
             <span className={styles.title}>{t('title')}</span>
-            {count > 0 && (
-              <span className={styles.count}>
-                ({t('items', { count })})
-              </span>
-            )}
+            <span className={styles.count}>({getCountLabel(count)})</span>
           </div>
-          <button className={styles.closeBtn} onClick={() => toggleDrawer(false)} aria-label="Zavrieť">
+          <button
+            className={styles.closeBtn}
+            onClick={() => toggleDrawer(false)}
+            aria-label={t('continueShopping')}
+          >
             ×
           </button>
         </div>
@@ -48,12 +54,13 @@ export default function BasketDrawer() {
             <div className={styles.empty}>
               <span className={styles.emptyIcon}>🛒</span>
               <p className={styles.emptyText}>{t('empty')}</p>
+              <p className={styles.emptySubtext}>{t('emptySubtext')}</p>
               <Link
                 href={`/${locale}/products`}
                 className={styles.emptyLink}
                 onClick={() => toggleDrawer(false)}
               >
-                {tn('products')}
+                {t('continueShopping')}
               </Link>
             </div>
           ) : (
@@ -70,7 +77,7 @@ export default function BasketDrawer() {
             </div>
 
             {total >= 60 ? (
-              <p className={styles.deliveryFree}>✓ {t('freeShipping')}</p>
+              <p className={styles.deliveryFree}>{t('freeShipping')}</p>
             ) : (
               <p className={styles.deliveryNote}>{t('freeShippingFrom')}</p>
             )}
@@ -84,7 +91,7 @@ export default function BasketDrawer() {
             </Link>
 
             <button className={styles.continueBtn} onClick={() => toggleDrawer(false)}>
-              {t('continue')}
+              {t('continueShopping')}
             </button>
           </div>
         )}

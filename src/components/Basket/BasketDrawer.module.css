@@ -105,7 +105,14 @@
 
 .emptyText {
   font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.emptySubtext {
+  font-size: var(--text-sm);
   color: var(--color-text-muted);
+  margin-top: calc(var(--space-2) * -1);
 }
 
 .emptyLink {

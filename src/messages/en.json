@@ -95,13 +95,19 @@
   },
   "basket": {
     "title":           "Basket",
-    "items":           "{count, plural, one {{count} item} other {{count} items}}",
     "empty":           "Your basket is empty",
+    "emptySubtext":    "Add products and start shopping",
+    "continueShopping":"Continue shopping",
     "checkout":        "Proceed to checkout",
-    "continue":        "Continue shopping",
     "total":           "Total",
-    "freeShipping":    "Free delivery!",
-    "freeShippingFrom":"Free delivery from 60 €"
+    "freeShipping":    "✓ Free shipping!",
+    "freeShippingFrom":"Free shipping from 60 €",
+    "removeItem":      "Remove",
+    "perPiece":        "/ pc",
+    "items_0":         "empty",
+    "items_1":         "1 item",
+    "items_2_4":       "{count} items",
+    "items_5":         "{count} items"
   },
   "checkout": {
     "title":             "Checkout",
