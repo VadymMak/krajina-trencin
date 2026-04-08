@@ -1,16 +1,23 @@
-import styles from '../admin.module.css';
+import { prisma } from '@/lib/prisma';
+import OrdersTable from './OrdersTable';
 
-export default function AdminOrdersPage() {
-  return (
-    <>
-      <div className={styles.pageHeader}>
-        <h1 className={styles.pageTitle}>Objednávky</h1>
-      </div>
-      <div className={styles.card}>
-        <div className={styles.empty}>
-          🛒 Správa objednávok bude implementovaná po integrácii platobnej brány.
-        </div>
-      </div>
-    </>
-  );
+export const dynamic = 'force-dynamic';
+
+export default async function AdminOrdersPage() {
+  const raw = await prisma.order.findMany({
+    orderBy: { createdAt: 'desc' },
+    include: {
+      items: {
+        include: { product: true },
+      },
+    },
+  });
+
+  // Serialize dates to strings for client component
+  const orders = raw.map((o) => ({
+    ...o,
+    createdAt: o.createdAt.toISOString(),
+  }));
+
+  return <OrdersTable orders={orders} />;
 }

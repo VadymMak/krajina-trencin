@@ -5,10 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useBasket } from '@/context/BasketContext';
+import { DELIVERY_THRESHOLD, DELIVERY_PRICE } from '@/lib/config';
 import styles from './page.module.css';
-
-const DELIVERY_THRESHOLD = 60;
-const DELIVERY_PRICE     = 3.99;
 
 interface CustomerInfo {
   name:    string;

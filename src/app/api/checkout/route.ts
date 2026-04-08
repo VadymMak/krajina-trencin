@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getStripe } from '@/lib/stripe';
+import { DELIVERY_THRESHOLD, DELIVERY_PRICE, SITE_URL } from '@/lib/config';
 
 interface CheckoutItem {
   id:       number;
@@ -18,9 +19,6 @@ interface CustomerInfo {
   zip:     string;
 }
 
-const DELIVERY_THRESHOLD = 60;
-const DELIVERY_PRICE_EUR = 3.99;
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
 export async function POST(req: NextRequest) {
   if (!process.env.STRIPE_SECRET_KEY) {
@@ -46,7 +44,7 @@ export async function POST(req: NextRequest) {
     type:         'fixed_amount' as const,
     display_name: freeShipping ? 'Doprava zadarmo' : 'Štandardná doprava',
     fixed_amount: {
-      amount:   freeShipping ? 0 : Math.round(DELIVERY_PRICE_EUR * 100),
+      amount:   freeShipping ? 0 : Math.round(DELIVERY_PRICE * 100),
       currency: 'eur',
     },
   };

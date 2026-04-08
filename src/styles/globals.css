@@ -27,6 +27,15 @@
   /* Colors — gold */
   --color-gold:         #C9A347;
 
+  /* Colors — status badges */
+  --color-yellow:       #eab308;
+  --color-red:          #ef4444;
+
+  /* RGB channels for status badges */
+  --color-green-rgb:    74, 124, 89;
+  --color-yellow-rgb:   234, 179, 8;
+  --color-red-rgb:      239, 68, 68;
+
   /* RGB channels for rgba() composition */
   --color-accent-rgb:    139, 94, 60;
   --color-white-rgb:     255, 255, 255;

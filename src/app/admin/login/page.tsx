@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import styles from '../admin.module.css';
+import { useAdminTranslations } from '../i18n/useAdminTranslations';
 
 export default function AdminLoginPage() {
+  const { t } = useAdminTranslations();
   const [pw,      setPw]      = useState('');
   const [error,   setError]   = useState('');
   const [loading, setLoading] = useState(false);
@@ -25,12 +27,12 @@ export default function AdminLoginPage() {
       if (res.ok && data.success) {
         window.location.href = '/admin/products';
       } else {
-        setError('Nesprávne heslo');
+        setError(t.wrongPassword);
         setLoading(false);
       }
     } catch (err) {
       console.error('Login error:', err);
-      setError('Chyba prihlásenia');
+      setError(t.wrongPassword);
       setLoading(false);
     }
   }
@@ -38,15 +40,15 @@ export default function AdminLoginPage() {
   return (
     <div className={styles.loginPage}>
       <div className={styles.loginCard}>
-        <div className={styles.loginTitle}>Krajina Admin</div>
-        <div className={styles.loginSub}>Prihláste sa do administrácie</div>
+        <div className={styles.loginTitle}>{t.adminTitle}</div>
+        <div className={styles.loginSub}>{t.loginSubtitle}</div>
 
         <form onSubmit={onSubmit}>
           {error && <p className={styles.loginError}>{error}</p>}
           <input
             className={styles.loginInput}
             type="password"
-            placeholder="Heslo"
+            placeholder={t.password}
             value={pw}
             onChange={(e) => setPw(e.target.value)}
             autoFocus
@@ -55,14 +57,9 @@ export default function AdminLoginPage() {
           <button className={styles.loginBtn} type="submit" disabled={loading}>
             <span className={styles.loginBtnInner}>
               {loading && (
-                <span style={{
-                  display: 'inline-block', width: 16, height: 16,
-                  border: '2px solid rgba(255,255,255,0.3)',
-                  borderTop: '2px solid white', borderRadius: '50%',
-                  animation: 'spin 0.8s linear infinite',
-                }} />
+                <span className={styles.loginSpinner} aria-hidden="true" />
               )}
-              {loading ? 'Prihlasovanie…' : 'Prihlásiť sa'}
+              {loading ? t.loggingIn : t.loginBtn}
             </span>
           </button>
         </form>
