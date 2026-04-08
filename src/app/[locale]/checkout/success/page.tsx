@@ -22,7 +22,8 @@ export default function CheckoutSuccessPage() {
       return;
     }
     clearBasket();
-  }, [sessionId, locale, router, clearBasket]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionId, locale, router]);
 
   return (
     <main className={styles.main}>

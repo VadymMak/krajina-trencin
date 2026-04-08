@@ -5,6 +5,8 @@ import {
   useContext,
   useReducer,
   useEffect,
+  useCallback,
+  useMemo,
   ReactNode,
 } from 'react';
 
@@ -118,13 +120,33 @@ export function BasketProvider({ children }: { children: ReactNode }) {
   const total = state.items.reduce((s, i) => s + i.price * i.quantity, 0);
   const count = state.items.reduce((s, i) => s + i.quantity, 0);
 
-  const actions: BasketActions = {
-    addItem:      (product, quantity = 1) => dispatch({ type: 'ADD_ITEM',     payload: { ...product, quantity } }),
-    removeItem:   (id)                   => dispatch({ type: 'REMOVE_ITEM',  payload: { id } }),
-    updateQty:    (id, quantity)         => dispatch({ type: 'UPDATE_QTY',   payload: { id, quantity } }),
-    clearBasket:  ()                     => dispatch({ type: 'CLEAR_BASKET' }),
-    toggleDrawer: (open)                 => dispatch({ type: 'TOGGLE_DRAWER', payload: open }),
-  };
+  const addItem      = useCallback((product: Omit<BasketItem, 'quantity'>, quantity = 1) => {
+    dispatch({ type: 'ADD_ITEM', payload: { ...product, quantity } });
+  }, [dispatch]);
+
+  const removeItem   = useCallback((id: number) => {
+    dispatch({ type: 'REMOVE_ITEM', payload: { id } });
+  }, [dispatch]);
+
+  const updateQty    = useCallback((id: number, quantity: number) => {
+    dispatch({ type: 'UPDATE_QTY', payload: { id, quantity } });
+  }, [dispatch]);
+
+  const clearBasket  = useCallback(() => {
+    dispatch({ type: 'CLEAR_BASKET' });
+  }, [dispatch]);
+
+  const toggleDrawer = useCallback((open?: boolean) => {
+    dispatch({ type: 'TOGGLE_DRAWER', payload: open });
+  }, [dispatch]);
+
+  const actions = useMemo<BasketActions>(() => ({
+    addItem,
+    removeItem,
+    updateQty,
+    clearBasket,
+    toggleDrawer,
+  }), [addItem, removeItem, updateQty, clearBasket, toggleDrawer]);
 
   return (
     <StateCtx.Provider value={{ ...state, total, count }}>
