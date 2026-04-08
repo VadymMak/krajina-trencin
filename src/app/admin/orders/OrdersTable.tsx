@@ -12,12 +12,17 @@ interface OrderItem {
 }
 
 interface Order {
-  id:        number;
-  email:     string;
-  total:     number;
-  status:    string;
-  createdAt: string;
-  items:     OrderItem[];
+  id:           number;
+  email:        string;
+  total:        number;
+  status:       string;
+  createdAt:    string;
+  customerName: string | null;
+  phone:        string | null;
+  address:      string | null;
+  city:         string | null;
+  zip:          string | null;
+  items:        OrderItem[];
 }
 
 interface Props {
@@ -48,7 +53,10 @@ export default function OrdersTable({ orders }: Props) {
               <thead>
                 <tr>
                   <th>{t.orderId}</th>
+                  <th>{t.customer}</th>
                   <th>{t.email}</th>
+                  <th>{t.phone}</th>
+                  <th>{t.address}</th>
                   <th>{t.total}</th>
                   <th>{t.status}</th>
                   <th>{t.items}</th>
@@ -59,14 +67,25 @@ export default function OrdersTable({ orders }: Props) {
                 {orders.map((order) => (
                   <tr key={order.id}>
                     <td>#{order.id}</td>
+                    <td>{order.customerName ?? '—'}</td>
                     <td>{order.email}</td>
+                    <td>{order.phone ?? '—'}</td>
+                    <td>
+                      {order.address
+                        ? [order.address, order.zip, order.city].filter(Boolean).join(', ')
+                        : '—'}
+                    </td>
                     <td>{order.total.toFixed(2).replace('.', ',')} €</td>
                     <td>
                       <span className={`${orderStyles.badge} ${orderStyles[order.status] ?? orderStyles.pending}`}>
                         {statusLabel(order.status)}
                       </span>
                     </td>
-                    <td>{order.items.map((i) => `${i.product.name} ×${i.quantity}`).join(', ')}</td>
+                    <td>
+                      {order.items.length > 0
+                        ? order.items.map((i) => `${i.product.name} ×${i.quantity}`).join(', ')
+                        : '—'}
+                    </td>
                     <td>{new Date(order.createdAt).toLocaleDateString()}</td>
                   </tr>
                 ))}

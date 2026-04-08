@@ -63,6 +63,9 @@ export const adminTranslations = {
     loginBtn:         'Prihlásiť sa',
     loggingIn:        'Prihlasovanie…',
     wrongPassword:    'Nesprávne heslo',
+    customer:         'Zákazník',
+    phone:            'Telefón',
+    address:          'Adresa',
   },
   cs: {
     products:         'Produkty',
@@ -128,6 +131,9 @@ export const adminTranslations = {
     loginBtn:         'Přihlásit se',
     loggingIn:        'Přihlašování…',
     wrongPassword:    'Nesprávné heslo',
+    customer:         'Zákazník',
+    phone:            'Telefon',
+    address:          'Adresa',
   },
   en: {
     products:         'Products',
@@ -193,6 +199,9 @@ export const adminTranslations = {
     loginBtn:         'Login',
     loggingIn:        'Logging in…',
     wrongPassword:    'Wrong password',
+    customer:         'Customer',
+    phone:            'Phone',
+    address:          'Address',
   },
   uk: {
     products:         'Продукти',
@@ -258,6 +267,9 @@ export const adminTranslations = {
     loginBtn:         'Увійти',
     loggingIn:        'Вхід…',
     wrongPassword:    'Невірний пароль',
+    customer:         'Покупець',
+    phone:            'Телефон',
+    address:          'Адреса',
   },
 } as const;
 

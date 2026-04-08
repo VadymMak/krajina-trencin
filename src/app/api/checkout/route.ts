@@ -67,7 +67,14 @@ export async function POST(req: NextRequest) {
     metadata: {
       customerName: customerInfo.name,
       phone:        customerInfo.phone,
-      address:      `${customerInfo.address}, ${customerInfo.zip} ${customerInfo.city}`,
+      address:      customerInfo.address,
+      city:         customerInfo.city,
+      zip:          customerInfo.zip,
+      items:        JSON.stringify(items.map((item) => ({
+        id:       item.id,
+        quantity: item.quantity,
+        price:    item.price,
+      }))),
     },
     success_url: `${SITE_URL}/${locale}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url:  `${SITE_URL}/${locale}/checkout/cancel`,

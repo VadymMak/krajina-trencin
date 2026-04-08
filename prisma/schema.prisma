@@ -76,15 +76,20 @@ model VerificationToken {
 }
 
 model Order {
-  id        Int         @id @default(autoincrement())
-  userId    Int?
-  email     String
-  total     Float
-  status    String      @default("pending")
-  stripeId  String?
-  createdAt DateTime    @default(now())
-  user      User?       @relation(fields: [userId], references: [id])
-  items     OrderItem[]
+  id           Int         @id @default(autoincrement())
+  userId       Int?
+  email        String
+  total        Float
+  status       String      @default("pending")
+  stripeId     String?
+  customerName String?
+  phone        String?
+  address      String?
+  city         String?
+  zip          String?
+  createdAt    DateTime    @default(now())
+  user         User?       @relation(fields: [userId], references: [id])
+  items        OrderItem[]
 }
 
 model OrderItem {

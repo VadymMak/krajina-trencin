@@ -157,6 +157,11 @@ export const OrderScalarFieldEnum = {
   total: 'total',
   status: 'status',
   stripeId: 'stripeId',
+  customerName: 'customerName',
+  phone: 'phone',
+  address: 'address',
+  city: 'city',
+  zip: 'zip',
   createdAt: 'createdAt'
 } as const
 
